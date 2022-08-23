@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "meltano-edk"
+version = "0.1.0"
+description = "A framework for building Meltano extensions"
+authors = ["Meltano Team and Contributors"]
+maintainers = ["Meltano Team and Contributors"]
+readme = "README.md"
+homepage = "https://meltano.com"
+repository = "https://github.com/meltano/edk"
+keywords = [
+    "Meltano",
+    "Meltano SDK",
+    "ELT",
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Typing :: Typed",
+]
+license = "Apache 2.0"
+
+[tool.poetry.urls]
+"Issue Tracker" = "https://github.com/meltano/edk/issues"
+"Twitter" = "https://twitter.com/meltanodata/"
+"Changelog" = "https://github.com/meltano/edk/blob/main/CHANGELOG.md"
+"Slack" = "https://meltano.com/slack"
+"Youtube" = "https://www.youtube.com/meltano"
+
+[tool.poetry.dependencies]
+ppython = "<3.11,>=3.7.1"
+
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
