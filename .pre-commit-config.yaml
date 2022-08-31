@@ -13,11 +13,6 @@ repos:
         (?x)^(
             cookiecutter/.*/pyproject.toml
         )$
-  - id: check-yaml
-    exclude: |
-        (?x)^(
-            cookiecutter/.*/meltano.yml
-        )$
   - id: end-of-file-fixer
     exclude: (cookiecutter/.*|docs/.*|samples/.*\.json)
   - id: trailing-whitespace
@@ -45,14 +40,10 @@ repos:
     - darglint==1.8.1
     - flake8-annotations==2.9.0
     - flake8-docstrings==1.6.0
-    files: 'ext_airflow/.*'
+    files: 'meltano/edk/.*'
 
 - repo: https://github.com/asottile/pyupgrade
   rev: v2.37.3
   hooks:
   - id: pyupgrade
     args: [--py37-plus]
-    exclude: |
-        (?x)^(
-            files_airflow_ext/orchestrate/meltano.py
-        )$
