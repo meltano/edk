@@ -27,8 +27,9 @@ classifiers = [
 license = "Apache 2.0"
 
 packages = [
-    { include = "meltano" },
+  { include = "meltano" }
 ]
+
 
 [tool.poetry.urls]
 "Issue Tracker" = "https://github.com/meltano/edk/issues"
@@ -40,7 +41,7 @@ packages = [
 
 
 [tool.poetry.dependencies]
-python = "<3.11,>=3.7.1"
+python = "<3.11,>=3.7"
 
 
 [tool.poetry.dev-dependencies]
