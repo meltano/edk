@@ -4,6 +4,7 @@ from __future__ import annotations
 import sys
 from abc import ABCMeta, abstractmethod
 from enum import Enum
+from typing import Any
 
 import structlog
 import yaml
@@ -12,6 +13,8 @@ from meltano.edk import models
 
 
 class DescribeFormat(str, Enum):
+    """The currently supported Describe output formats."""
+
     text = "text"
     json = "json"
     yaml = "yaml"
@@ -20,11 +23,11 @@ class DescribeFormat(str, Enum):
 class ExtensionBase(metaclass=ABCMeta):
     """Basic extension interface that must be implemented by all extensions."""
 
-    def pre_invoke(self):
+    def pre_invoke(self) -> None:
         """Called before the extension is invoked."""
         pass
 
-    def initialize(self, force: bool = False):
+    def initialize(self, force: bool = False) -> None:
         """Initialize the extension.
 
         This method is called on-demand by the user to initialize the extension.
@@ -36,14 +39,18 @@ class ExtensionBase(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def invoke(self, command_name: str | None, *command_args) -> None:
+    def invoke(self, command_name: str | None, *command_args: Any) -> None:
         """Invoke method.
 
         This method is called when the extension is invoked.
+
+        Args:
+            command_name: The name of the command to invoke.
+            *command_args: The arguments to pass to the command.
         """
         pass
 
-    def post_invoke(self):
+    def post_invoke(self) -> None:
         """Called after the extension is invoked."""
         pass
 
@@ -74,14 +81,15 @@ class ExtensionBase(metaclass=ABCMeta):
         elif output_format == DescribeFormat.json:
             return self.describe().json(indent=2)
         elif output_format == DescribeFormat.yaml:
-            # just calling describe().dict() and dumping that to yaml yields a yaml that is subtly
-            # different to the json variant in that it you have an additional level of nesting.
+            # just calling describe().dict() and dumping that to yaml yields a yaml that
+            # is subtly different to the json variant in that it you have an additional
+            # level of nesting.
             return yaml.dump(
                 yaml.safe_load(self.describe().json()), sort_keys=False, indent=2
             )
 
     def pass_through_invoker(
-        self, logger: structlog.BoundLogger, *command_args
+        self, logger: structlog.BoundLogger, *command_args: Any
     ) -> None:
         """Pass-through invoker.
 
@@ -117,6 +125,6 @@ class ExtensionBase(metaclass=ABCMeta):
             self.post_invoke()
         except Exception:
             logger.exception(
-                "post_invoke failed with uncaught exception, please report to maintainer"
+                "post_invoke failed with uncaught exception, please report to maintainer"  # noqa: E501
             )
             sys.exit(1)

@@ -4,7 +4,7 @@ from __future__ import annotations
 import asyncio
 import os
 import subprocess
-from typing import IO
+from typing import IO, Any
 
 import structlog
 
@@ -13,7 +13,7 @@ log = structlog.get_logger()
 
 def log_subprocess_error(
     cmd: str, err: subprocess.CalledProcessError, error_message: str
-):
+) -> None:
     """Log a subprocess error, replaying stderr to the logger if it's available.
 
     Args:
@@ -32,12 +32,14 @@ def log_subprocess_error(
 
 
 class Invoker:
+    """Invoker utility class for invoking subprocesses."""
+
     def __init__(
         self,
         bin: str,
         cwd: str = None,
         env: dict[str, any] | None = None,
-    ):
+    ) -> None:
         """Minimal invoker for running subprocesses.
 
         Args:
@@ -51,11 +53,11 @@ class Invoker:
 
     def run(
         self,
-        *args,
+        *args: str | bytes | os.PathLike[str] | os.PathLike[bytes],
         stdout: None | int | IO = subprocess.PIPE,
         stderr: None | int | IO = subprocess.PIPE,
         text: bool = True,
-        **kwargs,
+        **kwargs: Any,
     ) -> subprocess.CompletedProcess:
         """Run a subprocess. Simple wrapper around subprocess.run.
 
@@ -73,11 +75,10 @@ class Invoker:
             text: If true, decode stdin, stdout and stderr using the system default.
             **kwargs: Additional keyword arguments to pass to subprocess.run.
 
+        May indirectly raise CalledProcessError if the underlying subprocess failed.
+
         Returns:
             The completed process.
-
-        Raises:
-            subprocess.CalledProcessError: If the subprocess failed.
         """
         return subprocess.run(
             [self.bin, *args],
@@ -104,7 +105,9 @@ class Invoker:
             await asyncio.sleep(0)
 
     async def _exec(
-        self, sub_command: str | None = None, *args
+        self,
+        sub_command: str | None = None,
+        *args: str | bytes | os.PathLike[str] | os.PathLike[bytes],
     ) -> asyncio.subprocess.Process:
         popen_args = []
         if sub_command:
@@ -125,7 +128,11 @@ class Invoker:
         await p.wait()
         return p
 
-    def run_and_log(self, sub_command: str | None = None, *args) -> None:
+    def run_and_log(
+        self,
+        sub_command: str | None = None,
+        *args: str | bytes | os.PathLike[str] | os.PathLike[bytes],
+    ) -> None:
         """Run a subprocess and stream the output to the logger.
 
         Note that output from stdout and stderr IS logged. Best used when you want
@@ -136,7 +143,7 @@ class Invoker:
             *args: The arguments to pass to the subprocess.
 
         Raises:
-            subprocess.CalledProcessError: If the subprocess failed.
+            CalledProcessError: If the subprocess failed.
         """
         result = asyncio.run(self._exec(sub_command, *args))
         if result.returncode:

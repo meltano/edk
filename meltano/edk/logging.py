@@ -14,13 +14,16 @@ LEVELS = {  # noqa: WPS407
     "error": logging.ERROR,
     "critical": logging.CRITICAL,
 }
+
 DEFAULT_LEVEL = "info"
 
 
 def parse_log_level(log_level: dict[str, int]) -> int:
     """Parse a level descriptor into an logging level.
+
     Args:
         log_level: level descriptor.
+
     Returns:
         int: actual logging level.
     """
@@ -28,11 +31,11 @@ def parse_log_level(log_level: dict[str, int]) -> int:
 
 
 def default_logging_config(
-    level=logging.INFO,
+    level: int = logging.INFO,
     timestamps: bool = False,
     levels: bool = False,
     json_format: bool = False,
-):
+) -> None:
     """default/demo structlog configuration.
 
     Args:
@@ -93,7 +96,8 @@ def default_logging_config(
 def pass_through_logging_config() -> None:
     """Pass-through logging configuration.
 
-    Setups a logging config using the LOG_LEVEL, LOG_TIMESTAMPS, LOG_LEVELS, and MELTANO_LOG_JSON env vars.
+    Setups a logging config using the LOG_LEVEL, LOG_TIMESTAMPS, LOG_LEVELS,
+    and MELTANO_LOG_JSON env vars.
     """
     log_level = os.environ.get("LOG_LEVEL", "INFO")
     log_timestamps = os.environ.get("LOG_TIMESTAMPS", False)
