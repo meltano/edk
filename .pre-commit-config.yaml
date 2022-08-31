@@ -1,0 +1,58 @@
+ci:
+  autofix_prs: false
+  autoupdate_schedule: weekly
+  autoupdate_commit_msg: 'chore: pre-commit autoupdate'
+
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.3.0
+  hooks:
+  - id: check-json
+  - id: check-toml
+    exclude: |
+        (?x)^(
+            cookiecutter/.*/pyproject.toml
+        )$
+  - id: check-yaml
+    exclude: |
+        (?x)^(
+            cookiecutter/.*/meltano.yml
+        )$
+  - id: end-of-file-fixer
+    exclude: (cookiecutter/.*|docs/.*|samples/.*\.json)
+  - id: trailing-whitespace
+
+- repo: https://github.com/psf/black
+  rev: 22.6.0
+  hooks:
+  - id: black
+    exclude: |
+        (?x)^(
+            cookiecutter/.*
+        )$
+
+- repo: https://github.com/pycqa/isort
+  rev: 5.10.1
+  hooks:
+  - id: isort
+    exclude: (cookiecutter/.*)
+
+- repo: https://github.com/pycqa/flake8
+  rev: 5.0.4
+  hooks:
+  - id: flake8
+    additional_dependencies:
+    - darglint==1.8.1
+    - flake8-annotations==2.9.0
+    - flake8-docstrings==1.6.0
+    files: 'ext_airflow/.*'
+
+- repo: https://github.com/asottile/pyupgrade
+  rev: v2.37.3
+  hooks:
+  - id: pyupgrade
+    args: [--py37-plus]
+    exclude: |
+        (?x)^(
+            files_airflow_ext/orchestrate/meltano.py
+        )$
