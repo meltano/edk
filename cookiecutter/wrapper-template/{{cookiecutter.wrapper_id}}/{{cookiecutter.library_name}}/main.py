@@ -8,8 +8,8 @@ import structlog
 import typer
 
 from {{ cookiecutter.library_name }}.wrapper import {{ cookiecutter.source_name }}
-from meltano_extension_sdk.extension import DescribeFormat
-from meltano_extension_sdk.logging import (default_logging_config,
+from meltano.edk.extension import DescribeFormat
+from meltano.edk.logging import (default_logging_config,
                                            parse_log_level)
 
 APP_NAME: str = "{{ cookiecutter.source_name }}"

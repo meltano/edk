@@ -10,9 +10,9 @@ from typing import Any
 
 import structlog
 
-from meltano_extension_sdk import models
-from meltano_extension_sdk.extension import ExtensionBase
-from meltano_extension_sdk.process import Invoker, log_subprocess_error
+from meltano.edk import models
+from meltano.edk.extension import ExtensionBase
+from meltano.edk.process import Invoker, log_subprocess_error
 
 log = structlog.get_logger()
 
