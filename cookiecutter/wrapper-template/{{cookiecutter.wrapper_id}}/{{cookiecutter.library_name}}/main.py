@@ -9,8 +9,7 @@ import typer
 
 from {{ cookiecutter.library_name }}.wrapper import {{ cookiecutter.source_name }}
 from meltano.edk.extension import DescribeFormat
-from meltano.edk.logging import (default_logging_config,
-                                           parse_log_level)
+from meltano.edk.logging import default_logging_config, parse_log_level
 
 APP_NAME: str = "{{ cookiecutter.source_name }}"
 
