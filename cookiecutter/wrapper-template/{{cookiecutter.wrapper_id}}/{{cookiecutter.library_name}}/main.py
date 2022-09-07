@@ -1,4 +1,4 @@
-"""{{ cookiecutter.source_name }} cli entrypoint."""
+"""{{ cookiecutter.extension_name }} cli entrypoint."""
 
 import os
 import sys
@@ -7,15 +7,15 @@ from typing import List
 import structlog
 import typer
 
-from {{ cookiecutter.library_name }}.wrapper import {{ cookiecutter.source_name }}
+from {{ cookiecutter.library_name }}.wrapper import {{ cookiecutter.extension_name }}
 from meltano.edk.extension import DescribeFormat
 from meltano.edk.logging import default_logging_config, parse_log_level
 
-APP_NAME: str = "{{ cookiecutter.source_name }}"
+APP_NAME: str = "{{ cookiecutter.extension_name }}"
 
 log = structlog.get_logger(APP_NAME)
 
-ext = {{ cookiecutter.source_name }}()
+ext = {{ cookiecutter.extension_name }}()
 
 typer.core.rich = None  # remove to enable stylized help output when `rich` is installed
 app = typer.Typer(pretty_exceptions_enable=False)
@@ -23,7 +23,7 @@ app = typer.Typer(pretty_exceptions_enable=False)
 
 @app.command()
 def initialize(ctx: typer.Context, force: bool = False) -> None:
-    """Initialize the {{ cookiecutter.source_name }} plugin.
+    """Initialize the {{ cookiecutter.extension_name }} plugin.
 
     Args:
         ctx: The typer context.

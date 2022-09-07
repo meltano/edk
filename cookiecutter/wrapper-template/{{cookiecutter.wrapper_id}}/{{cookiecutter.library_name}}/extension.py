@@ -1,4 +1,4 @@
-"""Meltano {{ cookiecutter.source_name }} extension."""
+"""Meltano {{ cookiecutter.extension_name }} extension."""
 from __future__ import annotations
 
 import os
@@ -17,13 +17,13 @@ from meltano.edk.process import Invoker, log_subprocess_error
 log = structlog.get_logger()
 
 
-class {{ cookiecutter.source_name }}(ExtensionBase):
+class {{ cookiecutter.extension_name }}(ExtensionBase):
     """Extension implementing the ExtensionBase interface."""
 
     def __init__(self) -> None:
         """Initialize the extension."""
-        self.{{ cookiecutter.extension_name }}_bin = "{{ cookiecutter.wrapper_target_name }}"  # verify this is the correct name
-        self.{{ cookiecutter.extension_name }}_invoker = Invoker(self.{{ cookiecutter.extension_name }}_bin)
+        self.{{ cookiecutter.extension_name_lower }}_bin = "{{ cookiecutter.wrapper_target_name }}"  # verify this is the correct name
+        self.{{ cookiecutter.extension_name_lower }}_invoker = Invoker(self.{{ cookiecutter.extension_name_lower }}_bin)
 
     def invoke(self, command_name: str | None, *command_args: Any) -> None:
         """Invoke the underlying cli, that is being wrapped by this extension.
@@ -33,10 +33,10 @@ class {{ cookiecutter.source_name }}(ExtensionBase):
             command_args: The arguments to pass to the command.
         """
         try:
-            self.{{ cookiecutter.extension_name }}_invoker.run_and_log(command_name, *command_args)
+            self.{{ cookiecutter.extension_name_lower }}_invoker.run_and_log(command_name, *command_args)
         except subprocess.CalledProcessError as err:
             log_subprocess_error(
-                f"{{ cookiecutter.extension_name }} {command_name}", err, "{{ cookiecutter.extension_name }} invocation failed"
+                f"{{ cookiecutter.extension_name_lower }} {command_name}", err, "{{ cookiecutter.extension_name }} invocation failed"
             )
             sys.exit(err.returncode)
 

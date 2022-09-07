@@ -1,7 +1,7 @@
 tests:
-  - source_name: TestExtension
+  - extension_name: TestExtension
     admin_name: "Bob Loblaw"
-    extension_name: testextension
+    extension_name_lower: testextension
     wrapper_id: testextension-ext
     library_name: testextension_ext
     cli_prefix: testextension

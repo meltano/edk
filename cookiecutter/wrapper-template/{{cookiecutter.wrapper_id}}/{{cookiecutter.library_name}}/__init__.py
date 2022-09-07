@@ -1,1 +1,1 @@
-"""Meltano {{ cookiecutter.source_name }} Extension."""
+"""Meltano {{ cookiecutter.extension_name }} Extension."""

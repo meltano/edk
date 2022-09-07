@@ -1,9 +1,9 @@
 {
-  "source_name": "MyExtensionName",
+  "extension_name": "MyExtensionName",
   "admin_name": "FirstName LastName",
-  "extension_name": "{{ cookiecutter.source_name.lower() }}",
-  "wrapper_id": "{{ cookiecutter.extension_name }}-ext",
+  "extension_name_lower": "{{ cookiecutter.extension_name.lower() }}",
+  "wrapper_id": "{{ cookiecutter.extension_name_lower }}-ext",
   "library_name": "{{ cookiecutter.wrapper_id.replace('-', '_') }}",
-  "cli_prefix": "{{ cookiecutter.extension_name.lower() }}",
+  "cli_prefix": "{{ cookiecutter.extension_name_lower }}",
   "wrapper_target_name": "some-third-party-cli"
 }
