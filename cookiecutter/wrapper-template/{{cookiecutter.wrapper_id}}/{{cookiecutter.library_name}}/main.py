@@ -25,13 +25,11 @@ app = typer.Typer(
 
 
 @app.command()
-def initialize(ctx: typer.Context, force: bool = False) -> None:
-    """Initialize the {{ cookiecutter.extension_name }} plugin.
-
-    Args:
-        ctx: The typer context.
-        force: If True, and if you would like to support it - force initialization.
-    """
+def initialize(
+    ctx: typer.Context,
+    force: bool = typer.Option(False, help="Force initialization (if supported)"),
+) -> None:
+    """Initialize the {{ cookiecutter.extension_name }} plugin."""
     try:
         ext.initialize(force)
     except Exception:
