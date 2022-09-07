@@ -4,7 +4,7 @@ import sys
 import structlog
 
 from {{ cookiecutter.library_name }}.extension import {{ cookiecutter.extension_name }}
-from meltano_extension_sdk.logging import pass_through_logging_config
+from meltano.edk.logging import pass_through_logging_config
 
 
 def pass_through_cli() -> None:
