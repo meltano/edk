@@ -98,15 +98,7 @@ def main(
         help="Log in the meltano JSON log format"
     ),
 ) -> None:
-    """Simple Meltano extension that wraps the {{ cookiecutter.wrapper_target_name }} CLI.
-
-    Args:
-        ctx: The typer.Context for this invocation
-        log_level: The log level to use.
-        log_timestamps: Show timestamp in logs.
-        log_levels: Show log levels.
-        meltano_log_json: Log in the meltano JSON log format.
-    """
+    """Simple Meltano extension that wraps the {{ cookiecutter.wrapper_target_name }} CLI."""
     default_logging_config(
         level=parse_log_level(log_level),
         timestamps=log_timestamps,
