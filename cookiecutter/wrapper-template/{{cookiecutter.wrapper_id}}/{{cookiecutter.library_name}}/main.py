@@ -50,10 +50,6 @@ def invoke(ctx: typer.Context, command_args: List[str]) -> None:
     Note: that if a command argument is a list, such as command_args,
     then unknown options are also included in the list and NOT stored in the
     context as usual.
-
-    Args:
-        ctx: The typer.Context for this invocation
-        command_args: The command args to invoke
     """
     command_name, command_args = command_args[0], command_args[1:]
     log.debug(
