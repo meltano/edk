@@ -68,11 +68,7 @@ def describe(
         DescribeFormat.text, "--format", help="Output format"
     )
 ) -> None:
-    """Describe the available commands of this extension.
-
-    Args:
-        output_format: The output format to use.
-    """
+    """Describe the available commands of this extension."""
     try:
         typer.echo(ext.describe_formatted(output_format))
     except Exception:
