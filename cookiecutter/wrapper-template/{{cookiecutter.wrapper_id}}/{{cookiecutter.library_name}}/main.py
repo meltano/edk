@@ -18,7 +18,10 @@ log = structlog.get_logger(APP_NAME)
 ext = {{ cookiecutter.extension_name }}()
 
 typer.core.rich = None  # remove to enable stylized help output when `rich` is installed
-app = typer.Typer(pretty_exceptions_enable=False)
+app = typer.Typer(
+    name=APP_NAME,
+    pretty_exceptions_enable=False,
+)
 
 
 @app.command()
