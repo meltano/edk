@@ -3,7 +3,7 @@ import sys
 
 import structlog
 
-from {{ cookiecutter.library_name }}.wrapper import {{ cookiecutter.extension_name }}
+from {{ cookiecutter.library_name }}.extension import {{ cookiecutter.extension_name }}
 from meltano_extension_sdk.logging import pass_through_logging_config
 
 

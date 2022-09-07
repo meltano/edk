@@ -7,7 +7,7 @@ from typing import List
 import structlog
 import typer
 
-from {{ cookiecutter.library_name }}.wrapper import {{ cookiecutter.extension_name }}
+from {{ cookiecutter.library_name }}.extension import {{ cookiecutter.extension_name }}
 from meltano.edk.extension import DescribeFormat
 from meltano.edk.logging import default_logging_config, parse_log_level
 
