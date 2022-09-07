@@ -11,7 +11,7 @@ from {{ cookiecutter.library_name }}.extension import {{ cookiecutter.extension_
 from meltano.edk.extension import DescribeFormat
 from meltano.edk.logging import default_logging_config, parse_log_level
 
-APP_NAME: str = "{{ cookiecutter.extension_name }}"
+APP_NAME = "{{ cookiecutter.extension_name }}"
 
 log = structlog.get_logger(APP_NAME)
 
