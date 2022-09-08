@@ -68,11 +68,11 @@ class Invoker:
         stdout and stderr by default are set up to use subprocess.PIPE. If you do not
         want to capture io from the subprocess use subprocess.DEVNULL to discard it.
 
-        The Invoker's at env and cwd are used when calling subprocess.run. If you want
-        to override these you're likely better served using subprocess.run directly.
+        The Invoker's at env and cwd are used when calling `subprocess.run`. If you want
+        to override these you're likely better served using `subprocess.run` directly.
 
-        Lastly note that this method is blocking AND subprocess.run is called with
-        check=True. This means that if the subprocess fails a CalledProcessError will
+        Lastly note that this method is blocking AND `subprocess.run` is called with
+        `check=True`. This means that if the subprocess fails a `CalledProcessError` will
         be raised.
 
         Args:
