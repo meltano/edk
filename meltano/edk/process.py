@@ -72,8 +72,8 @@ class Invoker:
         to override these you're likely better served using `subprocess.run` directly.
 
         Lastly note that this method is blocking AND `subprocess.run` is called with
-        `check=True`. This means that if the subprocess fails a `CalledProcessError` will
-        be raised.
+        `check=True`. This means that if the subprocess fails a `CalledProcessError`
+        will be raised.
 
         Args:
             *args: The arguments to pass to the subprocess.
