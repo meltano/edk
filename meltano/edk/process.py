@@ -126,6 +126,7 @@ class Invoker:
             *popen_args,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
+            cwd=self.cwd,
             env=self.popen_env,
         )
 
