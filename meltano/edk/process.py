@@ -129,8 +129,16 @@ class Invoker:
             cwd=self.cwd,
             env=self.popen_env,
         )
-        asyncio.create_task(self._log_stdio(p.stderr))
-        asyncio.create_task(self._log_stdio(p.stdout))
+
+        results = await asyncio.gather(
+            asyncio.create_task(self._log_stdio(p.stderr)),
+            asyncio.create_task(self._log_stdio(p.stdout)),
+            return_exceptions=True,
+        )
+
+        for r in results:  # raise first exception if any
+            if isinstance(r, Exception):
+                raise r
 
         await p.wait()
         return p
