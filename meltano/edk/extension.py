@@ -23,8 +23,13 @@ class DescribeFormat(str, Enum):
 class ExtensionBase(metaclass=ABCMeta):
     """Basic extension interface that must be implemented by all extensions."""
 
-    def pre_invoke(self) -> None:
-        """Called before the extension is invoked."""
+    def pre_invoke(self, command_name: str | None, *command_args: Any) -> None:
+        """Called before the extension is invoked.
+
+        Args:
+            command_name: The name of the command being invoked.
+            *command_args: The arguments that would be passed to the command.
+        """
         pass
 
     def initialize(self, force: bool = False) -> None:
@@ -50,8 +55,13 @@ class ExtensionBase(metaclass=ABCMeta):
         """
         pass
 
-    def post_invoke(self) -> None:
-        """Called after the extension is invoked."""
+    def post_invoke(self, command_name: str | None, *command_args: Any) -> None:
+        """Called after the extension is invoked.
+
+        Args:
+            command_name: The name of the command that was invoked.
+            *command_args: The arguments passed to the command that was invoked.
+        """
         pass
 
     @abstractmethod
