@@ -23,12 +23,12 @@ class DescribeFormat(str, Enum):
 class ExtensionBase(metaclass=ABCMeta):
     """Basic extension interface that must be implemented by all extensions."""
 
-    def pre_invoke(self, command_name: str | None, *command_args: Any) -> None:
+    def pre_invoke(self, invoke_name: str | None, *invoke_args: Any) -> None:
         """Called before the extension is invoked.
 
         Args:
-            command_name: The name of the command being invoked.
-            *command_args: The arguments that would be passed to the command.
+            invoke_name: The name of the command that will be passed to invoke.
+            *invoke_args: The arguments that will be passed to invoke.
         """
         pass
 
@@ -55,12 +55,12 @@ class ExtensionBase(metaclass=ABCMeta):
         """
         pass
 
-    def post_invoke(self, command_name: str | None, *command_args: Any) -> None:
+    def post_invoke(self, invoked_name: str | None, *invoked_args: Any) -> None:
         """Called after the extension is invoked.
 
         Args:
-            command_name: The name of the command that was invoked.
-            *command_args: The arguments passed to the command that was invoked.
+            invoked_name: The name of the command that was invoked.
+            *invoked_args: The arguments passed to the command that was invoked.
         """
         pass
 
