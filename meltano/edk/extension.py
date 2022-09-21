@@ -23,8 +23,13 @@ class DescribeFormat(str, Enum):
 class ExtensionBase(metaclass=ABCMeta):
     """Basic extension interface that must be implemented by all extensions."""
 
-    def pre_invoke(self) -> None:
-        """Called before the extension is invoked."""
+    def pre_invoke(self, invoke_name: str | None, *invoke_args: Any) -> None:
+        """Called before the extension is invoked.
+
+        Args:
+            invoke_name: The name of the command that will be passed to invoke.
+            *invoke_args: The arguments that will be passed to invoke.
+        """
         pass
 
     def initialize(self, force: bool = False) -> None:
@@ -50,8 +55,13 @@ class ExtensionBase(metaclass=ABCMeta):
         """
         pass
 
-    def post_invoke(self) -> None:
-        """Called after the extension is invoked."""
+    def post_invoke(self, invoked_name: str | None, *invoked_args: Any) -> None:
+        """Called after the extension is invoked.
+
+        Args:
+            invoked_name: The name of the command that was invoked.
+            *invoked_args: The arguments passed to the command that was invoked.
+        """
         pass
 
     @abstractmethod
@@ -106,7 +116,7 @@ class ExtensionBase(metaclass=ABCMeta):
             command_args=command_args,
         )
         try:
-            self.pre_invoke()
+            self.pre_invoke(None, command_args)
         except Exception:
             logger.exception(
                 "pre_invoke failed with uncaught exception, please report to maintainer"
@@ -122,7 +132,7 @@ class ExtensionBase(metaclass=ABCMeta):
             sys.exit(1)
 
         try:
-            self.post_invoke()
+            self.post_invoke(None, command_args)
         except Exception:
             logger.exception(
                 "post_invoke failed with uncaught exception, please report to maintainer"  # noqa: E501
