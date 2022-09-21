@@ -116,7 +116,7 @@ class ExtensionBase(metaclass=ABCMeta):
             command_args=command_args,
         )
         try:
-            self.pre_invoke()
+            self.pre_invoke(None, command_args)
         except Exception:
             logger.exception(
                 "pre_invoke failed with uncaught exception, please report to maintainer"
@@ -132,7 +132,7 @@ class ExtensionBase(metaclass=ABCMeta):
             sys.exit(1)
 
         try:
-            self.post_invoke()
+            self.post_invoke(None, command_args)
         except Exception:
             logger.exception(
                 "post_invoke failed with uncaught exception, please report to maintainer"  # noqa: E501
