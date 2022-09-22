@@ -5,6 +5,23 @@ description = "`{{cookiecutter.wrapper_id}}` is a Meltano utility extension."
 authors = ["{{ cookiecutter.admin_name }}"]
 license = "Apache 2.0"
 
+
+packages = [
+    { include = "{{cookiecutter.library_name}}" }
+    # uncomment this if you want to include static assets
+    # { include = "files_{{cookiecutter.wrapper_id}}.*" }
+]
+
+# If you need to include static assets with your extension, you can add them here.
+# Under a directory path of "files_{{cookiecutter.wrapper_id}}/". These will be
+# included in both the sdist and wheel by default.
+#
+# See https://python-poetry.org/docs/pyproject/#include-and-exclude for further
+# details.
+#include = [
+#    {path = "files_{{cookiecutter.wrapper_id}}"}
+#]
+
 [tool.poetry.dependencies]
 python = "<3.11,>=3.7"
 structlog = "^21.2.0"
@@ -23,17 +40,7 @@ flake8 = "^3.9.0"
 requires = ["poetry-core>=1.0.8"]
 build-backend = "poetry.core.masonry.api"
 
-packages = [
-    { include = "{{cookiecutter.library_name}}" }
-    # uncomment this if you want to include static assets
-    # { include = "files_{{cookiecutter.wrapper_id}}.*" }
-]
 
-# If you need to static assets with your extension, you can add them here.
-# Under a directory path of "files_{{cookiecutter.wrapper_id}}/"
-#include = [
-#    "files_{{cookiecutter.wrapper_id}}/somefile.thing"
-#]
 
 [tool.poetry.scripts]
 {{cookiecutter.cli_prefix}}_extension = '{{cookiecutter.library_name}}.main:app'
