@@ -17,7 +17,7 @@
 Developers are free to add additional sub-commands for end users to use, but the following sub-commands are required:
 
 ```shell
-extension_extension describe --format=[default=json, yaml, plain] 
+extension_extension describe --format=[default=json, yaml, plain]
 extension_extension initialize # may noop
 extension_extension --help
 ```
