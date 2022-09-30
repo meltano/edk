@@ -1,49 +1,40 @@
-## Extension types
+# Extension types
 
-### Plain extensions
+- Plain extensions
+  Plain extensions are extensions that do work directly, they may call other applications (including meltano) but serve a specific purpose (e.g. managing local cronjobs) rather than wrapping another application.
 
-Plain extensions are extensions that do work directly, they may call other applications (including meltano) but serve a specific purprose (e.g. managing local cronjobs) rather than wrapping another application.
+  Plain extensions should supply a single CLI that is the entry point for the extension. This CLI should be named `extensionname_extension` (e.g. `cron_extension`).
 
-Plain extensions should supply a single cli that is the entrypoint for the extension. This cli should be named `extensionname_extension` (e.g. `cron_extension`).
+- Wrapper extensions
+  Wrapper extensions are extensions that wrap other applications to make them more accessible to a meltano user. They may also provide additional functionality on top of the application or provide a more user-friendly interface.
 
-### Wrapper extensions
+  For example, the dbt extension wraps the dbt CLI and provides additional functionality to manage dbt projects and simplifies the process of running dbt with meltano.
 
-Wrapper extensions are extensions that wrap other applications to make them more accessible to a meltano user. They may also provide additional functionality on top of the application or provide a more user friendly interface.
+  Wrapper extension should supply two CLI commands, one for interacting with the extension itself, and one for interacting with the wrapped application. The extension CLI should be named `extensionname_extension` (e.g. `superset_extension`) and the wrapped application CLI should be named `extensionname_invoker` (e.g. `superset_invoker`).
 
-For example the dbt extension wraps the dbt cli and provides additional functionality to manage dbt projects and simplifies the process of running dbt with meltano.
+## Extension commands
 
-Wrapper extension should supply two cli commands, one for interacting with the extension itself, and one for interacting with the wrapped application. The extension cli should be named `extensionname_extension` (e.g. `superset_extension`) and the wrapped application cli should be named `extensionname_invoker` (e.g. `superset_invoker`).
-
-## Initial required commands and syntax
-
-## `_extension` commands:
+Developers are free to add additional sub-commands for end users to use, but the following sub-commands are required:
 
 ```shell
-extension_extension invoke <specific-command> # for wrapper extensions
-extension_extension invoke <:splat>           # for wrapper extensions
-extension_extension describe --format=[default=json, yaml?]
-extension_extension initialize
+extension_extension describe --format=[default=json, yaml, plain] 
+extension_extension initialize # may noop
 extension_extension --help
 ```
 
-### `invoke`
+Additionally, when an extension is wrapper a `invoke` sub-command is expected:
 
-Analogous to a `meltano invoke <command> [flags...]`, the `extension invoke <command>` call is expected to behave similarly and invoke the requested command. i.e.
-
-```shell
-extension invoke sync-ui # may sync with some dashboard ui
-extension invoke deploy # may perform some other action
+```
+extension_extension invoke <:splat> # for wrapper extensions, this should invoke the application being wrapped.
 ```
 
-
-
-### `describe`
+### `describe` sub-command
 
 > **Note** - Evolving status. "best practice" recommendation, not *yet* a requirement
 
-The describe command allows for auto discovery/configuration and generally describes the execution requirements of the extension itself (not necissarily the wrapper). In v1 the payload is limited. Consisting only of `commands` which describes what the commands the extension command itself (e.g. `_ext`), supports and whether the command is a wrapper command or not.
+The describe command allows for auto discovery/configuration and generally describes the execution requirements of the extension itself (not necessarily the wrapper). In v1, the payload is limited. Consisting only of `commands` which describes what the commands the extension command itself (e.g. `_ext`), supports and whether the command is a wrapper command or not.
 
-Expected `describe` output, jsonspec pending:
+Expected `describe` output, spec pending:
 
 ```shell
 $ poetry run superset_extension describe
@@ -72,11 +63,20 @@ Describe(
 )
 ```
 
-### `initialize` / `init`
+### `initialize` / `init` sub-commands
 
 > **Note** - Evolving "best practice" recommendation, not *yet* a requirement
 
-The `init` command is a convenience command that allows for a user to initialize an extension. Performing one time setup tasks. i.e. creating a config file, or configuring scaffolding.
+The `init` command is a convenience command that allows for a user to initialize an extension. Performing one-time setup tasks. i.e. creating a config file, or configuring scaffolding.
+
+### `invoke` sub-command
+
+Analogous to a `meltano invoke <command> [flags...]`, the `extension invoke <command>` call is expected to behave similarly and invoke the requested command. i.e.
+
+```shell
+extension invoke sync-ui # may sync with some dashboard ui
+extension invoke deploy # may perform some other action
+```
 
 ### Special/reserved command keywords
 
@@ -95,20 +95,20 @@ Some future commands may trigger special handling behavior upstream within Melta
 
 - `test*` (test, test_a_thing, test-other-thing, testAllThings) which maybe triggered during `meltano test`.
 
-If a extension exposes multiple matching commands, they're invoked in the order they're encountered.
+If an extension exposes multiple matching commands, they're invoked in the order they're encountered.
 
-### exit codes
+### Exit codes
 
 - `0` in all success cases
 - All non 0 indicate unsuccessful invocation and in most cases will halt the execution chain
 
-## `_invoker` commands:
+## Invoker command:
 
 `_invoker` commands should accept the same arguments, in the same format, as the wrapped application. This includes bare invocations and help commands. The `_invoker` should effectively transparently pass all arguments to the wrapped application.
 
-### exit codes
+### Exit codes
 
-For `_invoker` commands, the exit code should typically be the same as the exit code of the wrapped application. In cases the where the `_invoker` itself is responsible for the exit code standard unix exit codes should be used.
+For `invoker` commands, the exit code should typically be the same as the exit code of the wrapped application. In cases the where the `_invoker` itself is responsible for the exit code, standard Unix exit codes should be used.
 
 - `0` in all success cases
 - All non 0 indicate unsuccessful invocation and in most cases will halt the execution chain
@@ -118,7 +118,7 @@ For `_invoker` commands, the exit code should typically be the same as the exit 
 ### IO
 
 - stdin is currently unused but reserved.  It's unused at this time, but maybe used for message passing in the future.
-- stdout is currently unused but reserved. It's unused at this time, but might be used for message passing in the future. extensions should avoid needlessly writing to stdout.
+- stdout is currently unused but reserved. It's unused at this time, but might be used for message passing in the future. Extensions should avoid needlessly writing to stdout.
 - stderr is available for structured extension output intended for end users and operators.
 
 ### Errors & Output
@@ -145,7 +145,7 @@ $ extension invoke scheduler
 2022-07-26 17:30.32 [ERROR] message="Failed to start airflow: couldn't create db" error="/some/path doesn't exist" important=context
 ```
 
-"bad" example:
+"Bad" example:
 
 ```shell
 $ extension invoke scheduler
@@ -161,9 +161,9 @@ In the future, the spec will likely evolve to report errors in an explicitly str
 
 > **Note** - Evolving "best practice" recommendation, not *yet* a requirement
 
-The following enviornment variables or cli flags should be supported by extensions to control logging behavior:
+The following environment variables or CLI flags should be supported by extensions to control logging behavior:
 
 - `LOG_LEVEL` - set the log level for the extension. Defaults to `INFO` if not set.
-- `LOG_TIMESTAMPS` - set to strig `true` to enable logging of timestamp field. Defaults to `false` if not set.
+- `LOG_TIMESTAMPS` - set to string `true` to enable logging of timestamp field. Defaults to `false` if not set.
 - `LOG_LEVELS` - set to string `true` to enable logging of log level field. Defaults to `false` if not set.
 - `MELTANO_LOG_JSON` - set to string `true` to enable JSON logging. Defaults to `false` if not set.
