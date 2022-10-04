@@ -32,7 +32,7 @@ class ExtensionBase(metaclass=ABCMeta):
         """
         pass
 
-    def initialize(self, force: bool = False) -> None:
+    def init(self, force: bool = False) -> None:
         """Initialize the extension.
 
         This method is called on-demand by the user to initialize the extension.

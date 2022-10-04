@@ -31,7 +31,7 @@ def initialize(
 ) -> None:
     """Initialize the {{ cookiecutter.extension_name }} plugin."""
     try:
-        ext.initialize(force)
+        ext.init(force)
     except Exception:
         log.exception(
             "initialize failed with uncaught exception, please report to maintainer"
