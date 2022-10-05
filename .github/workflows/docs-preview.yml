@@ -6,6 +6,7 @@ on:
     - opened
   workflow_dispatch:
     inputs: { }
+  pull_request:
 
 permissions:
   pull-requests: write
