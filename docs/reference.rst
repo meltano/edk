@@ -22,7 +22,7 @@ Process Management
 
     process.Invoker
 
-Logging utils
--------------
+Logging Utilities
+-----------------
 .. automodule:: meltano.edk.logging
     :members:
