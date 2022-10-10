@@ -1,4 +1,4 @@
-"""Test cookiecutter template."""
+"""Test copier_template template."""
 
 import logging
 import os
@@ -9,7 +9,7 @@ from pathlib import Path
 import black
 import pytest
 import yaml
-from cookiecutter.main import cookiecutter
+from copier import run_auto
 from flake8.api import legacy as flake8
 from mypy import api
 
@@ -30,32 +30,8 @@ def outdir() -> str:
     shutil.rmtree(name)
 
 
-def pytest_generate_tests(metafunc):
-    """Generate test cases for each Cookiecutter template."""
-    id_list = []
-    argvalues = []
-
-    for template in [
-        "wrapper"
-    ]:  # we only have one template today but will have two shortly
-        template_dir = f"cookiecutter/{template}-template"
-        case_key = f"{template}_id"
-        test_input_file = os.path.join(template_dir, "cookiecutter.tests.yml")
-
-        for case in yaml.safe_load(Path(test_input_file).read_text())["tests"]:
-            id_list.append(case[case_key])
-            argvalues.append([template_dir, case])
-
-    metafunc.parametrize(
-        ["cookiecutter_dir", "cookiecutter_input"],
-        argvalues,
-        ids=id_list,
-        scope="function",
-    )
-
-
-def test_cookiecutter(outdir: str, cookiecutter_dir: str, cookiecutter_input: dict):
-    """Generate and validate project from Cookiecutter."""
+def test_copier_output(outdir: str):
+    """Generate and validate the resulting copier managed template."""
     style_guide_easy = flake8.get_style_guide(
         ignore=["E302", "E303", "E305", "F401", "W391"]
     )
@@ -66,13 +42,27 @@ def test_cookiecutter(outdir: str, cookiecutter_dir: str, cookiecutter_input: di
             "W391",  # "blank line at end of file"
         ]
     )
-    cookiecutter(
-        template=cookiecutter_dir,
-        output_dir=outdir,
-        extra_context=cookiecutter_input,
-        overwrite_if_exists=True,
-        no_input=True,
+
+    template_path = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "copier_template/"
     )
+
+    run_auto(
+        src_path=template_path,
+        dst_path=outdir,
+        data={
+            "admin_name": "John Doe",
+            "cli_prefix": "testflow",
+            "extension_description": "A meltano utility extension for testflow that wraps the /bin/notreal command.",
+            "extension_id": "testflow-ext",
+            "extension_name": "Testflow",
+            "extension_name_lower": "testflow",
+            "library_name": "testflow_ext",
+            "wrapper_target_name": "/bin/notreal",
+        },
+        quiet=True,
+    )
+
     for outfile in Path(outdir).glob("**/*.py"):
         filepath = str(outfile.absolute())
         report = style_guide_easy.check_files([filepath])

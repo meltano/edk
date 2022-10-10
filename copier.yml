@@ -1,0 +1,51 @@
+extension_name:
+  type: str
+  help: The name of your extension i.e. `MyExtensionName`
+
+admin_name:
+  type: str
+  help: The name of the admin to use for the pyproject.toml entry e.g. `Bob Loblaw`
+
+extension_name_lower:
+  type: str
+  help: The name of your extension in lowercase e.g. `myextensionname`
+  default: "{{ extension_name.lower() }}"
+
+extension_id:
+  type: str
+  help: The ID of the wrapper to use e.g. `myextensionname-ext`
+  default: "{{ extension_name_lower }}-ext"
+
+library_name:
+  type: str
+  help: The name of the library to use e.g. `myextensionname_ext`
+  default: "{{ extension_id.replace('-', '_') }}"
+
+cli_prefix:
+  type: str
+  help: The prefix to use for the CLI e.g. `myextensionname`
+  default: "{{ extension_name_lower }}"
+
+wrapper_target_name:
+  type: str
+  help: The path/name of the cli command you are wrapping e.g. `dbt`
+
+extension_description:
+  type: str
+  help: A short description of what this extension does. Will be used for the generated README.md.
+  default: "A meltano utility extension for {{ extension_name }} that wraps the `{{ wrapper_target_name }}` command."
+
+_subdirectory: copier_template
+_exclude:
+  - "copier.yaml"
+  - "copier.yml"
+  - "*.py[co]"
+  - "__pycache__"
+  - ".git"
+  - ".DS_Store"
+  - ".github"
+  - ".flake8"
+  - ".pre-commit-config.yaml"
+  - "tests"
+  - "poetry.lock"
+  - "LICENSE"
