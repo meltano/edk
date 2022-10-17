@@ -11,10 +11,10 @@ repos:
   - id: check-toml
     exclude: |
         (?x)^(
-            cookiecutter/.*/pyproject.toml
+            copier_template/.*/pyproject.toml
         )$
   - id: end-of-file-fixer
-    exclude: (cookiecutter/.*|docs/.*|samples/.*\.json)
+    exclude: (copier_template/.*|docs/.*|samples/.*\.json)
   - id: trailing-whitespace
 
 - repo: https://github.com/psf/black
@@ -23,14 +23,14 @@ repos:
   - id: black
     exclude: |
         (?x)^(
-            cookiecutter/.*
+            copier_template/.*
         )$
 
 - repo: https://github.com/pycqa/isort
   rev: 5.10.1
   hooks:
   - id: isort
-    exclude: (cookiecutter/.*)
+    exclude: (copier_template/.*)
 
 - repo: https://github.com/pycqa/flake8
   rev: 5.0.4

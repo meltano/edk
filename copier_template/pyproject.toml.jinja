@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "{{cookiecutter.wrapper_id}}"
+name = "{{extension_id}}"
 version = "0.0.1"
-description = "`{{cookiecutter.wrapper_id}}` is a Meltano utility extension."
-authors = ["{{ cookiecutter.admin_name }}"]
+description = "`{{extension_id}}` is a Meltano utility extension."
+authors = ["{{ admin_name }}"]
 license = "Apache 2.0"
 
 [tool.poetry.dependencies]
@@ -24,17 +24,17 @@ requires = ["poetry-core>=1.0.8"]
 build-backend = "poetry.core.masonry.api"
 
 packages = [
-    { include = "{{cookiecutter.library_name}}" }
+    { include = "{{library_name}}" }
     # uncomment this if you want to include static assets
-    # { include = "files_{{cookiecutter.wrapper_id}}.*" }
+    # { include = "files_{{extension_id}}.*" }
 ]
 
 # If you need to static assets with your extension, you can add them here.
-# Under a directory path of "files_{{cookiecutter.wrapper_id}}/"
+# Under a directory path of "files_{{extension_id}}/"
 #include = [
-#    "files_{{cookiecutter.wrapper_id}}/somefile.thing"
+#    "files_{{extension_id}}/somefile.thing"
 #]
 
 [tool.poetry.scripts]
-{{cookiecutter.cli_prefix}}_extension = '{{cookiecutter.library_name}}.main:app'
-{{cookiecutter.cli_prefix}}_invoker = '{{cookiecutter.library_name}}.pass_through:pass_through_cli'
+{{cli_prefix}}_extension = '{{library_name}}.main:app'
+{{cli_prefix}}_invoker = '{{library_name}}.pass_through:pass_through_cli'
