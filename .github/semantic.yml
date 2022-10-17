@@ -26,6 +26,6 @@ types:
 #      the scope would be "awesome-feature"
 scopes:
   - edk # edk only
-  - templates  # cookiecutter templates only
+  - templates  # copier_template templates only
   - deps       # production dependencies
   - deps-dev   # development depencencies (testing, linting, etc.)
