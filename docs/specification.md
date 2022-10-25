@@ -1,4 +1,6 @@
-# Extension types
+# EDK Specification
+
+## Extension types
 
 - Plain extensions
   Plain extensions are extensions that do work directly, they may call other applications (including meltano) but serve a specific purpose (e.g. managing local cronjobs) rather than wrapping another application.
@@ -102,7 +104,7 @@ If an extension exposes multiple matching commands, they're invoked in the order
 - `0` in all success cases
 - All non 0 indicate unsuccessful invocation and in most cases will halt the execution chain
 
-## Invoker command:
+## The Invoker command
 
 `_invoker` commands should accept the same arguments, in the same format, as the wrapped application. This includes bare invocations and help commands. The `_invoker` should effectively transparently pass all arguments to the wrapped application.
 

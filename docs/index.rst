@@ -11,6 +11,8 @@ Welcome to Meltano EDK's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   specification
+
 
 Reference
 ---------
