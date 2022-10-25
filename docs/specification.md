@@ -8,7 +8,8 @@
 
   Plain extensions should supply a single CLI that is the entry point for the extension. This CLI should be named `extensionname_extension` (e.g. `cron_extension`).
 
-- Wrapper extensions
+### Wrapper Extensions
+
   Wrapper extensions are extensions that wrap other applications to make them more accessible to a meltano user. They may also provide additional functionality on top of the application or provide a more user-friendly interface.
 
   For example, the dbt extension wraps the dbt CLI and provides additional functionality to manage dbt projects and simplifies the process of running dbt with meltano.
