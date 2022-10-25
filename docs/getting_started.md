@@ -1,8 +1,5 @@
 # Getting Started with the EDK
 
-[![Documentation Status](https://readthedocs.org/projects/meltano-edk/badge/?version=latest)](https://edk.meltano.com/en/latest/?badge=latest) |
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/meltano/edk/main.svg)](https://results.pre-commit.ci/latest/github/meltano/edk/main)
-
 The Meltano extension developer kit is the fastest way to build custom Meltano extensions. Extensions allow you to integrate any existing data tool into your existing Meltano projects - or build your own.
 
 ## What can I build with the EDK?
