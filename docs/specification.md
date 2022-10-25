@@ -2,7 +2,8 @@
 
 ## Extension types
 
-- Plain extensions
+### Plain Extensions
+
   Plain extensions are extensions that do work directly, they may call other applications (including meltano) but serve a specific purpose (e.g. managing local cronjobs) rather than wrapping another application.
 
   Plain extensions should supply a single CLI that is the entry point for the extension. This CLI should be named `extensionname_extension` (e.g. `cron_extension`).
