@@ -34,7 +34,7 @@ poetry install
 
 ## Developing extensions using the EDK
 
-For detailed instructions on developing Meltano EDK extensions, see the [Meltano EDK documentation](https://edk.meltano.com) and review the [Work-In-Progress Specification](https://github.com/meltano/edk/blob/main/README.md).
+For detailed instructions on developing Meltano EDK extensions, see the [Meltano EDK documentation](https://edk.meltano.com) and review the [Work-In-Progress Specification](https://meltano-edk--28.org.readthedocs.build/en/28/specification.html).
 
 For working examples of Meltano EDK extensions, see:
 
