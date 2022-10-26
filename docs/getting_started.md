@@ -180,7 +180,7 @@ index 877977b..b9d77c3 100644
 The line `Howdy. I'm a pre-invoke task being called by the extension` will now be printed to the console when you run the `myextensionthing_invoker` command:
 
 ```shell
-$ my-new-extension git:(main) ✗ poetry run myextensionthing_invoker -a
+$ poetry run myextensionthing_invoker -a
 Howdy. I'm a pre-invoke task being called by the extension
 Darwin MacBook-Pro.localdomain 21.6.0 Darwin Kernel Version 21.6.0: Mon Aug 22 20:19:52 PDT 2022; root:xnu-8020.140.49~2/RELEASE_ARM64_T6000 arm64
 ```
