@@ -15,6 +15,7 @@ Extensions allow you to integrate any existing data tool into your Meltano proje
    :caption: Contents:
 
    getting_started
+   specification
 
 
 Reference
