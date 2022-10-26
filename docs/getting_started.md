@@ -132,7 +132,7 @@ $ poetry run myextensionthing_invoker -a
 Darwin MacBook-Pro.localdomain 21.6.0 Darwin Kernel Version 21.6.0: Mon Aug 22 20:19:52 PDT 2022; root:xnu-8020.140.49~2/RELEASE_ARM64_T6000 arm64
 ```
 
-But you can also call interact with the extension itself:
+But you can also interact with the extension itself:
 
 ```shell
 $ poetry run myextensionthing_extension --help
@@ -177,7 +177,7 @@ index 877977b..b9d77c3 100644
 +        log.info("Howdy. I am a pre-invoke task being called by the extension")
 ```
 
-The line `Howdy. I am a pre-invoke task being called by the extension` will now be printed to the console when you run the `myextensionthing_invoker` command:
+The line `Howdy. I am a pre-invoke task being called by the extension` will now be printed to the console everytime you run the `myextensionthing_invoker` command:
 
 ```shell
 $ poetry run myextensionthing_invoker -a
@@ -185,4 +185,4 @@ Howdy. I am a pre-invoke task being called by the extension
 Darwin MacBook-Pro.localdomain 21.6.0 Darwin Kernel Version 21.6.0: Mon Aug 22 20:19:52 PDT 2022; root:xnu-8020.140.49~2/RELEASE_ARM64_T6000 arm64
 ```
 
-The extension base class also provides a `post_invoke` method that can be used to run tasks after the wrapped command is invoked, head over to the [EDK reference docs](https://edk.meltano.com/en/latest/classes/meltano.edk.extension.ExtensionBase.html#meltano.edk.extension.ExtensionBase) for more information on what interface consists of and what else available.
+The extension base class also provides a `post_invoke` method that can be used to run tasks after the wrapped command is invoked, head over to the [EDK reference docs](https://edk.meltano.com/en/latest/classes/meltano.edk.extension.ExtensionBase.html#meltano.edk.extension.ExtensionBase) for more information on what the interface consists of and what else available out of the box.
