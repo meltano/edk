@@ -1,10 +1,10 @@
 # Getting Started with the EDK
 
-The Meltano extension developer kit is the fastest way to build custom Meltano extensions. Extensions allow you to integrate any existing data tool into your existing Meltano projects - or build your own.
+The Meltano Extension Developer Kit (EDK) is the fastest way to build custom Meltano extensions. Extensions allow you to integrate any existing data tool into your existing Meltano projects - or build your own.
 
 ## What can I build with the EDK?
 
-For examples of types of tools you can build or wrap with the EDK, see the MeltanoHub [Utilities](https://hub.meltano.com/utilities/), [Orchestrators](https://hub.meltano.com/orchestrators), and [Transformers](https://hub.meltano.com/transformers/) lists.
+For examples of types of tools you can build or wrap with the EDK, see the list of [EDK Preview Utilities](https://hub.meltano.com/utilities/) on Meltano Hub.
 
 If you're looking to build a custom data extractor or loader (aka "taps" and "targets"), then the [*Meltano Singer SDK*](https://github.com/meltano/singer-sdk) is actually what you're looking for.
 
