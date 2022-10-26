@@ -161,3 +161,28 @@ Commands:
 $ poetry run myextensionthing_extension initialize
 <outputs nothing, because this extension currently has no initialization tasks>
 ```
+
+From here you can start adding your own functionality to the extension. For example, if you wanted to run something prior to invoking the wrapped command, you could add a `pre_invoke` method to the `extension.py` file:
+
+```diff
+diff --git a/myextensionthing_ext/extension.py b/myextensionthing_ext/extension.py
+index 877977b..b9d77c3 100644
+--- a/myextensionthing_ext/extension.py
++++ b/myextensionthing_ext/extension.py
+@@ -57,3 +57,5 @@ class MyExtensionThing(ExtensionBase):
+             ]
+         )
+
++    def pre_invoke(self, invoke_name: str | None, *invoke_args: Any) -> None:
++        log.info("Howdy. I'm a pre-invoke task being called by the extension")
+```
+
+The line `Howdy. I'm a pre-invoke task being called by the extension` will now be printed to the console when you run the `myextensionthing_invoker` command:
+
+```shell
+$ my-new-extension git:(main) ✗ poetry run myextensionthing_invoker -a
+Howdy. I'm a pre-invoke task being called by the extension
+Darwin MacBook-Pro.localdomain 21.6.0 Darwin Kernel Version 21.6.0: Mon Aug 22 20:19:52 PDT 2022; root:xnu-8020.140.49~2/RELEASE_ARM64_T6000 arm64
+```
+
+The extension base class also provides a `post_invoke` method that can be used to run tasks after the wrapped command is invoked, head over to the [EDK reference docs](https://edk.meltano.com/en/latest/classes/meltano.edk.extension.ExtensionBase.html#meltano.edk.extension.ExtensionBase) for more information on what interface consists of and what else available.
