@@ -6,10 +6,15 @@
 Welcome to Meltano EDK's documentation!
 =======================================
 
+The Meltano extension developer kit is the fastest way to build custom extensions and utilities for Meltano.
+Extensions allow you to integrate any existing data tool into your Meltano project - or build your own!
+
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+
+   getting_started
 
 
 Reference
