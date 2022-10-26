@@ -185,4 +185,4 @@ Howdy. I am a pre-invoke task being called by the extension
 Darwin MacBook-Pro.localdomain 21.6.0 Darwin Kernel Version 21.6.0: Mon Aug 22 20:19:52 PDT 2022; root:xnu-8020.140.49~2/RELEASE_ARM64_T6000 arm64
 ```
 
-The extension base class also provides a `post_invoke` method that can be used to run tasks after the wrapped command is invoked, head over to the [EDK reference docs](https://edk.meltano.com/en/latest/classes/meltano.edk.extension.ExtensionBase.html#meltano.edk.extension.ExtensionBase) for more information on what the interface consists of and what else available out of the box.
+The extension base class also provides a `post_invoke` method that can be used to run tasks after the wrapped command is invoked, head over to the [EDK reference docs](https://edk.meltano.com/en/latest/classes/meltano.edk.extension.ExtensionBase.html#meltano.edk.extension.ExtensionBase) for more information on what the interface consists of and what else is available out of the box.
