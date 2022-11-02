@@ -4,6 +4,16 @@ version = "0.0.1"
 description = "`{{extension_id}}` is a Meltano utility extension."
 authors = ["{{ admin_name }}"]
 license = "Apache 2.0"
+packages = [
+    { include = "{{library_name}}" }
+    # uncomment this if you want to include static assets
+    # { include = "files_{{extension_id}}.*" }
+]
+# If you need to static assets with your extension, you can add them here.
+# Under a directory path of "files_{{extension_id}}/"
+#include = [
+#    "files_{{extension_id}}/somefile.thing"
+#]
 
 [tool.poetry.dependencies]
 python = "<3.11,>=3.7"
@@ -22,18 +32,6 @@ flake8 = "^3.9.0"
 [build-system]
 requires = ["poetry-core>=1.0.8"]
 build-backend = "poetry.core.masonry.api"
-
-packages = [
-    { include = "{{library_name}}" }
-    # uncomment this if you want to include static assets
-    # { include = "files_{{extension_id}}.*" }
-]
-
-# If you need to static assets with your extension, you can add them here.
-# Under a directory path of "files_{{extension_id}}/"
-#include = [
-#    "files_{{extension_id}}/somefile.thing"
-#]
 
 [tool.poetry.scripts]
 {{cli_prefix}}_extension = '{{library_name}}.main:app'
