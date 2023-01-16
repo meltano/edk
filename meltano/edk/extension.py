@@ -9,6 +9,7 @@ from typing import Any
 import structlog
 import yaml
 from devtools.prettier import pformat
+
 from meltano.edk import models
 
 
