@@ -83,7 +83,7 @@ copier = "^6.2.0"
 profile = "black"
 multi_line_output = 3 # Vertical Hanging Indent
 src_paths = "meltano/edk"
-
+known_first_party = ["meltano"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
