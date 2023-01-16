@@ -1543,4 +1543,4 @@ docs = ["sphinx", "sphinx-rtd-theme", "sphinx-copybutton", "myst-parser", "sphin
 [metadata]
 lock-version = "2.0"
 python-versions = "<3.12,>=3.7"
-content-hash = "2516bc3e893e37ba4a7869c1994637f9c65cc44a8d53fcf9b33e35ed80a2d35f"
+content-hash = "fa2be45221d49f80763dcbff473d69ef1d615e157071223688de7c4b951903e4"
