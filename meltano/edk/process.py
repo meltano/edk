@@ -119,7 +119,7 @@ class Invoker:
         if sub_command:
             popen_args.append(sub_command)
         if args:
-            popen_args.extend(*args)
+            popen_args.extend(args)
 
         p = await asyncio.create_subprocess_exec(
             self.bin,

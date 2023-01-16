@@ -18,7 +18,7 @@ repos:
   - id: trailing-whitespace
 
 - repo: https://github.com/psf/black
-  rev: 22.10.0
+  rev: 22.12.0
   hooks:
   - id: black
     exclude: |
@@ -27,7 +27,7 @@ repos:
         )$
 
 - repo: https://github.com/pycqa/isort
-  rev: 5.10.1
+  rev: 5.11.4
   hooks:
   - id: isort
     exclude: (copier_template/.*)
@@ -43,7 +43,7 @@ repos:
     files: 'meltano/edk/.*'
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v3.2.2
+  rev: v3.3.1
   hooks:
   - id: pyupgrade
-    args: [--py37-plus]
+    args: [--py37-plus, --keep-mock]
