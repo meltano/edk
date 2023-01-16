@@ -20,6 +20,7 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: Implementation :: CPython",
     "Topic :: Software Development :: Libraries :: Application Frameworks",
     "Typing :: Typed",
@@ -41,11 +42,11 @@ packages = [
 
 
 [tool.poetry.dependencies]
-python = "<3.11,>=3.7"
-structlog = "^21.2.0"
+python = "<3.12,>=3.7"
+structlog = "^22.3.0"
 PyYAML = "^6.0.0"
-pydantic = "^1.9.0"
-devtools = "^0.9.0"
+pydantic = "^1.10.4"
+devtools = "^0.10.0"
 
 # Sphinx dependencies installed as optional 'docs' extras
 # https://github.com/readthedocs/readthedocs.org/issues/4912#issuecomment-664002569
@@ -65,8 +66,7 @@ docs = [
 ]
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
-isort = "^5.10.1"
+pytest = "^7.2.1"
 # Cookiecutter tests
 mypy = "^0.971"
 black = "^22.6"
