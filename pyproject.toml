@@ -51,7 +51,7 @@ devtools = "^0.10.0"
 # Sphinx dependencies installed as optional 'docs' extras
 # https://github.com/readthedocs/readthedocs.org/issues/4912#issuecomment-664002569
 sphinx = {version = ">=4.5,<6.0", optional = true}
-sphinx-rtd-theme = {version = ">=0.5.2,<1.1.0", optional = true}
+sphinx-rtd-theme = {version = ">=0.5.2,<1.2.0", optional = true}
 sphinx-copybutton = {version = ">=0.3.1,<0.6.0", optional = true}
 myst-parser = {version = ">=0.17.2,<0.19.0", optional = true}
 sphinx-autobuild = {version = "^2021.3.14", optional = true}
@@ -69,7 +69,7 @@ docs = [
 mock = "^5.0.1"
 pytest = "^7.2.1"
 # Cookiecutter tests
-mypy = "^0.971"
+mypy = "^0.991"
 black = "^22.6"
 darglint = "^1.8.0"
 flake8 = "^3.9.0"
