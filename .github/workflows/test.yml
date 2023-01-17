@@ -36,3 +36,27 @@ jobs:
       - name: Test with pytest
         run: |
           poetry run pytest
+
+  mypy:
+    name: Static type checking with mypy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: Install Poetry
+        run: |
+          pipx install poetry
+          poetry --version
+
+      - name: Install dependencies
+        run: |
+          poetry env use 3.10
+          poetry install
+
+      - name: Run mypy
+        run: |
+          poetry run mypy --namespace-packages -p meltano.edk

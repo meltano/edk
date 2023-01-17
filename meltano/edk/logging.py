@@ -4,6 +4,7 @@ from __future__ import annotations
 import logging
 import os
 import sys
+from typing import Callable
 
 import structlog
 
@@ -18,7 +19,36 @@ LEVELS = {  # noqa: WPS407
 DEFAULT_LEVEL = "info"
 
 
-def parse_log_level(log_level: dict[str, int]) -> int:
+def strtobool(val: str) -> bool:
+    """Convert a string representation of truth to true (1) or false (0).
+
+    True values are 'y', 'yes', 't', 'true', 'on', and '1'; false values
+    are 'n', 'no', 'f', 'false', 'off', and '0'.  Raises ValueError if
+    'val' is anything else.
+
+    Case is ignored in string comparisons.
+
+    Re-implemented from distutils.util.strtobool to avoid importing distutils.
+
+    Args:
+        val: The string to convert to a boolean.
+
+    Returns:
+        True if the string represents a truthy value, False otherwise.
+
+    Raises:
+        ValueError: If the string is not a valid representation of a boolean.
+    """
+    val = val.lower()
+    if val in {"y", "yes", "t", "true", "on", "1"}:
+        return True
+    elif val in {"n", "no", "f", "false", "off", "0"}:
+        return False
+
+    raise ValueError(f"invalid truth value {val!r}")
+
+
+def parse_log_level(log_level: str) -> int:
     """Parse a level descriptor into an logging level.
 
     Args:
@@ -44,11 +74,17 @@ def default_logging_config(
         levels: include levels in the log.
         json_format: if True, use JSON format, otherwise use human-readable format.
     """
-    processors = []
+    processors: list[Callable] = []
     if timestamps:
         processors.append(structlog.processors.TimeStamper(fmt="iso"))
     if levels:
         processors.append(structlog.processors.add_log_level)
+
+    renderer: structlog.processors.JSONRenderer | structlog.dev.ConsoleRenderer = (
+        structlog.processors.JSONRenderer()
+        if json_format
+        else structlog.dev.ConsoleRenderer(colors=False)
+    )
 
     processors.extend(
         [
@@ -65,9 +101,7 @@ def default_logging_config(
             structlog.processors.UnicodeDecoder(),
             structlog.processors.ExceptionPrettyPrinter(),
             # Render the final event dict as JSON.
-            structlog.processors.JSONRenderer()
-            if json_format
-            else structlog.dev.ConsoleRenderer(colors=False),
+            renderer,
         ]
     )
 
@@ -100,13 +134,13 @@ def pass_through_logging_config() -> None:
     and MELTANO_LOG_JSON env vars.
     """
     log_level = os.environ.get("LOG_LEVEL", "INFO")
-    log_timestamps = os.environ.get("LOG_TIMESTAMPS", False)
-    log_levels = os.environ.get("LOG_LEVELS", False)
-    meltano_log_json = os.environ.get("MELTANO_LOG_JSON", False)
+    log_timestamps = os.environ.get("LOG_TIMESTAMPS", "False")
+    log_levels = os.environ.get("LOG_LEVELS", "False")
+    meltano_log_json = os.environ.get("MELTANO_LOG_JSON", "False")
 
     default_logging_config(
         level=parse_log_level(log_level),
-        timestamps=log_timestamps,
-        levels=log_levels,
-        json_format=meltano_log_json,
+        timestamps=strtobool(log_timestamps),
+        levels=strtobool(log_levels),
+        json_format=strtobool(meltano_log_json),
     )
