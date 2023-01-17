@@ -76,7 +76,7 @@ class ExtensionBase(metaclass=ABCMeta):
         """
         pass
 
-    def describe_formatted(
+    def describe_formatted(  # type: ignore[return]
         self, output_format: DescribeFormat = DescribeFormat.text
     ) -> str:
         """Return a formatted description of the extensions commands and capabilities.

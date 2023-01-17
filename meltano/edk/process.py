@@ -4,11 +4,12 @@ from __future__ import annotations
 import asyncio
 import os
 import subprocess
-from typing import IO, Any
+from typing import IO, Any, Union
 
 import structlog
 
 log = structlog.get_logger()
+_ExecArg = Union[str, bytes]
 
 
 def log_subprocess_error(
@@ -37,8 +38,8 @@ class Invoker:
     def __init__(
         self,
         bin: str,
-        cwd: str = None,
-        env: dict[str, any] | None = None,
+        cwd: str | None = None,
+        env: dict[str, Any] | None = None,
     ) -> None:
         """Minimal invoker for running subprocesses.
 
@@ -53,7 +54,7 @@ class Invoker:
 
     def run(
         self,
-        *args: str | bytes | os.PathLike[str] | os.PathLike[bytes],
+        *args: _ExecArg,
         stdout: None | int | IO = subprocess.PIPE,
         stderr: None | int | IO = subprocess.PIPE,
         text: bool = True,
@@ -113,9 +114,9 @@ class Invoker:
     async def _exec(
         self,
         sub_command: str | None = None,
-        *args: str | bytes | os.PathLike[str] | os.PathLike[bytes],
+        *args: _ExecArg,
     ) -> asyncio.subprocess.Process:
-        popen_args = []
+        popen_args: list[_ExecArg] = []
         if sub_command:
             popen_args.append(sub_command)
         if args:
@@ -130,9 +131,16 @@ class Invoker:
             env=self.popen_env,
         )
 
+        streams: list[asyncio.streams.StreamReader] = []
+
+        if p.stderr:
+            streams.append(p.stderr)
+
+        if p.stdout:
+            streams.append(p.stdout)
+
         results = await asyncio.gather(
-            asyncio.create_task(self._log_stdio(p.stderr)),
-            asyncio.create_task(self._log_stdio(p.stdout)),
+            *[asyncio.create_task(self._log_stdio(stream)) for stream in streams],
             return_exceptions=True,
         )
 
@@ -146,7 +154,7 @@ class Invoker:
     def run_and_log(
         self,
         sub_command: str | None = None,
-        *args: str | bytes | os.PathLike[str] | os.PathLike[bytes],
+        *args: _ExecArg,
     ) -> None:
         """Run a subprocess and stream the output to the logger.
 
