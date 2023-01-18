@@ -4,12 +4,13 @@ from __future__ import annotations
 import asyncio
 import os
 import subprocess
-from typing import IO, Any, Union
+from typing import IO, Any
 
 import structlog
 
+from meltano.edk.types import ExecArg
+
 log = structlog.get_logger()
-_ExecArg = Union[str, bytes]
 
 
 def log_subprocess_error(
@@ -54,7 +55,7 @@ class Invoker:
 
     def run(
         self,
-        *args: _ExecArg,
+        *args: ExecArg,
         stdout: None | int | IO = subprocess.PIPE,
         stderr: None | int | IO = subprocess.PIPE,
         text: bool = True,
@@ -114,9 +115,9 @@ class Invoker:
     async def _exec(
         self,
         sub_command: str | None = None,
-        *args: _ExecArg,
+        *args: ExecArg,
     ) -> asyncio.subprocess.Process:
-        popen_args: list[_ExecArg] = []
+        popen_args: list[ExecArg] = []
         if sub_command:
             popen_args.append(sub_command)
         if args:
@@ -154,7 +155,7 @@ class Invoker:
     def run_and_log(
         self,
         sub_command: str | None = None,
-        *args: _ExecArg,
+        *args: ExecArg,
     ) -> None:
         """Run a subprocess and stream the output to the logger.
 
