@@ -4,13 +4,13 @@ from __future__ import annotations
 import sys
 from abc import ABCMeta, abstractmethod
 from enum import Enum
-from typing import Any
 
 import structlog
 import yaml
 from devtools.prettier import pformat
 
 from meltano.edk import models
+from meltano.edk.types import ExecArg
 
 
 class DescribeFormat(str, Enum):
@@ -24,7 +24,7 @@ class DescribeFormat(str, Enum):
 class ExtensionBase(metaclass=ABCMeta):
     """Basic extension interface that must be implemented by all extensions."""
 
-    def pre_invoke(self, invoke_name: str | None, *invoke_args: Any) -> None:
+    def pre_invoke(self, invoke_name: str | None, *invoke_args: ExecArg) -> None:
         """Called before the extension is invoked.
 
         Args:
@@ -45,7 +45,7 @@ class ExtensionBase(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def invoke(self, command_name: str | None, *command_args: Any) -> None:
+    def invoke(self, command_name: str | None, *command_args: ExecArg) -> None:
         """Invoke method.
 
         This method is called when the extension is invoked.
@@ -56,7 +56,7 @@ class ExtensionBase(metaclass=ABCMeta):
         """
         pass
 
-    def post_invoke(self, invoked_name: str | None, *invoked_args: Any) -> None:
+    def post_invoke(self, invoked_name: str | None, *invoked_args: ExecArg) -> None:
         """Called after the extension is invoked.
 
         Args:
@@ -100,7 +100,9 @@ class ExtensionBase(metaclass=ABCMeta):
             )
 
     def pass_through_invoker(
-        self, logger: structlog.BoundLogger, *command_args: Any
+        self,
+        logger: structlog.BoundLogger,
+        *command_args: ExecArg,
     ) -> None:
         """Pass-through invoker.
 
@@ -117,7 +119,7 @@ class ExtensionBase(metaclass=ABCMeta):
             command_args=command_args,
         )
         try:
-            self.pre_invoke(None, command_args)
+            self.pre_invoke(None, *command_args)
         except Exception:
             logger.exception(
                 "pre_invoke failed with uncaught exception, please report to maintainer"
@@ -125,7 +127,7 @@ class ExtensionBase(metaclass=ABCMeta):
             sys.exit(1)
 
         try:
-            self.invoke(None, command_args)
+            self.invoke(None, *command_args)
         except Exception:
             logger.exception(
                 "invoke failed with uncaught exception, please report to maintainer"
@@ -133,7 +135,7 @@ class ExtensionBase(metaclass=ABCMeta):
             sys.exit(1)
 
         try:
-            self.post_invoke(None, command_args)
+            self.post_invoke(None, *command_args)
         except Exception:
             logger.exception(
                 "post_invoke failed with uncaught exception, please report to maintainer"  # noqa: E501
