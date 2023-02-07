@@ -69,7 +69,7 @@ docs = [
 mock = "^5.0.1"
 pytest = "^7.2.1"
 # Cookiecutter tests
-mypy = "^0.991"
+mypy = "^1.0"
 black = "^23.1"
 darglint = "^1.8.0"
 flake8 = "^3.9.0"
