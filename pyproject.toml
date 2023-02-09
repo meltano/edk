@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "meltano-edk"
+name = "meltano.edk"
 version = "0.0.0"
 description = "A framework for building Meltano extensions"
 authors = ["Meltano Team and Contributors"]
