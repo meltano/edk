@@ -37,4 +37,4 @@ jobs:
         file_glob: true
     - name: Deploy to PyPI
       run: |
-        poetry publish -u "__token__" -p "${{ secrets.PYPI_TOKEN }}"
+        poetry publish -u "__token__" -p "${{ secrets.PYPI_SECRET_TOKEN }}"
