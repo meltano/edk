@@ -267,14 +267,14 @@ files = [
 
 [[package]]
 name = "copier"
-version = "6.2.0"
+version = "7.0.1"
 description = "A library for rendering project templates."
 category = "dev"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "copier-6.2.0-py3-none-any.whl", hash = "sha256:ae8aeb7a060035d56fe05ebdc4bce85d3516ceb7e97408437e869451e619d679"},
-    {file = "copier-6.2.0.tar.gz", hash = "sha256:792c66ed1a6eddd85690ba12035fdbf087a65b18c8b07c2527e3581296e29649"},
+    {file = "copier-7.0.1-py3-none-any.whl", hash = "sha256:c969890db6f1f69db02239f094458a91e36c22248d2952a03e75ac2460179c98"},
+    {file = "copier-7.0.1.tar.gz", hash = "sha256:3d81916dad27d003674070b365bfcd965eb69d5a97920b226d6db88a6e7193d6"},
 ]
 
 [package.dependencies]
@@ -294,9 +294,6 @@ pyyaml = ">=5.3.1"
 pyyaml-include = ">=1.2"
 questionary = ">=1.8.1"
 typing-extensions = {version = ">=3.7.4,<5.0.0", markers = "python_version < \"3.8\""}
-
-[package.extras]
-docs = ["mkdocs-material (>=8.2,<9.0.0)", "mkdocstrings[python] (>=0.19.0)"]
 
 [[package]]
 name = "darglint"
@@ -1616,4 +1613,4 @@ docs = ["sphinx", "sphinx-rtd-theme", "sphinx-copybutton", "myst-parser", "sphin
 [metadata]
 lock-version = "2.0"
 python-versions = "<3.12,>=3.7"
-content-hash = "76062a675ddc824685f0a6906d972fee2db0e23a326ae0bd01954df05cd9c84c"
+content-hash = "2275db06fc21cc259f564af33afd0e9988d3440e496f816fbb8ded874eac9e3e"
