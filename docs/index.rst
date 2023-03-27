@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Meltano Extension Developer Kit (EDK)
-=======================================
+=====================================
 
 The Meltano extension developer kit is the fastest way to build custom extensions and utilities for Meltano.
 Extensions allow you to integrate any existing data tool into your Meltano project - or build your own!
