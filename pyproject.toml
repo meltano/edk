@@ -59,7 +59,7 @@ sphinx-autobuild = {version = "^2021.3.14", optional = true}
 [tool.poetry.extras]
 docs = [
     "sphinx",
-    "sphinx-rtd-theme",
+    "furo",
     "sphinx-copybutton",
     "myst-parser",
     "sphinx-autobuild",
