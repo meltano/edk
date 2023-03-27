@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Meltano EDK's documentation!
+Meltano Extension Developer Kit (EDK)
 =======================================
 
 The Meltano extension developer kit is the fastest way to build custom extensions and utilities for Meltano.
