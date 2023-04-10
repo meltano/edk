@@ -67,7 +67,7 @@ docs = [
 
 [tool.poetry.dev-dependencies]
 mock = "^5.0.1"
-pytest = "^7.2.2"
+pytest = "^7.3.0"
 # Cookiecutter tests
 mypy = "^1.1"
 black = "^23.3"
