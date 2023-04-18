@@ -2,7 +2,11 @@ name: Build & Release
 
 on:
   release:
-    types: [created]
+    types: [published]  # Trigger only when a release is published, not when a release is drafted
+
+permissions:
+  contents: write  # Needed to upload artifacts to the release
+  id-token: write  # Needed for OIDC PyPI publishing
 
 jobs:
   build_and_release:
@@ -35,6 +39,5 @@ jobs:
         tag: ${{ github.ref }}
         overwrite: true
         file_glob: true
-    - name: Deploy to PyPI
-      run: |
-        poetry publish -u "__token__" -p "${{ secrets.PYPI_SECRET_TOKEN }}"
+    - name: Publish
+      uses: pypa/gh-action-pypi-publish@v1.8.5
