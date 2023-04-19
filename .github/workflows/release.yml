@@ -12,6 +12,7 @@ jobs:
   build_and_release:
 
     runs-on: ubuntu-latest
+    environment: publishing
 
     steps:
     - uses: actions/checkout@v3
