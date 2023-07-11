@@ -8,8 +8,7 @@ from pathlib import Path
 
 import black
 import pytest
-import yaml
-from copier import run_auto
+from copier import run_copy
 from flake8.api import legacy as flake8
 from mypy import api
 
@@ -47,7 +46,7 @@ def test_copier_output(outdir: str):
         os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "copier_template/"
     )
 
-    run_auto(
+    run_copy(
         src_path=template_path,
         dst_path=outdir,
         data={
