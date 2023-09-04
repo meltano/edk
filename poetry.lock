@@ -327,13 +327,13 @@ files = [
 
 [[package]]
 name = "devtools"
-version = "0.12.1"
+version = "0.12.2"
 description = "Python's missing debug print command, and more."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "devtools-0.12.1-py3-none-any.whl", hash = "sha256:972ba41ed3655660f8b6952684d8b21e10d274617651c169aaaf0ad423ec4767"},
-    {file = "devtools-0.12.1.tar.gz", hash = "sha256:9cac86adec822108006dd6b1c54fa900fc96c0b7e4c8928680403cd33a557553"},
+    {file = "devtools-0.12.2-py3-none-any.whl", hash = "sha256:c366e3de1df4cdd635f1ad8cbcd3af01a384d7abda71900e68d43b04eb6aaca7"},
+    {file = "devtools-0.12.2.tar.gz", hash = "sha256:efceab184cb35e3a11fa8e602cc4fadacaa2e859e920fc6f87bf130b69885507"},
 ]
 
 [package.dependencies]
