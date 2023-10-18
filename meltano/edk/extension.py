@@ -24,7 +24,11 @@ class DescribeFormat(str, Enum):
 class ExtensionBase(metaclass=ABCMeta):
     """Basic extension interface that must be implemented by all extensions."""
 
-    def pre_invoke(self, invoke_name: str | None, *invoke_args: ExecArg) -> None:
+    def pre_invoke(  # noqa: B027
+        self,
+        invoke_name: str | None,
+        *invoke_args: ExecArg,
+    ) -> None:
         """Called before the extension is invoked.
 
         Args:
@@ -33,7 +37,7 @@ class ExtensionBase(metaclass=ABCMeta):
         """
         pass
 
-    def initialize(self, force: bool = False) -> None:
+    def initialize(self, force: bool = False) -> None:  # noqa: B027
         """Initialize the extension.
 
         This method is called on-demand by the user to initialize the extension.
@@ -56,7 +60,7 @@ class ExtensionBase(metaclass=ABCMeta):
         """
         pass
 
-    def post_invoke(self, invoked_name: str | None, *invoked_args: ExecArg) -> None:
+    def post_invoke(self, invoked_name: str | None, *invoked_args: ExecArg) -> None:  # noqa: B027
         """Called after the extension is invoked.
 
         Args:

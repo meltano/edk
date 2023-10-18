@@ -4,7 +4,7 @@ from __future__ import annotations
 import asyncio
 import os
 import subprocess
-from typing import IO, Any
+import typing as t
 
 import structlog
 
@@ -40,7 +40,7 @@ class Invoker:
         self,
         bin: str,
         cwd: str | None = None,
-        env: dict[str, Any] | None = None,
+        env: dict[str, t.Any] | None = None,
     ) -> None:
         """Minimal invoker for running subprocesses.
 
@@ -56,10 +56,10 @@ class Invoker:
     def run(
         self,
         *args: ExecArg,
-        stdout: None | int | IO = subprocess.PIPE,
-        stderr: None | int | IO = subprocess.PIPE,
+        stdout: None | int | t.IO = subprocess.PIPE,
+        stderr: None | int | t.IO = subprocess.PIPE,
         text: bool = True,
-        **kwargs: Any,
+        **kwargs: t.Any,
     ) -> subprocess.CompletedProcess:
         """Run a subprocess. Simple wrapper around subprocess.run.
 
