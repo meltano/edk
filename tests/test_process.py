@@ -1,14 +1,15 @@
 import asyncio
+import typing as t
+from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
-from mock import AsyncMock, Mock, patch
 
 from meltano.edk.process import Invoker
 
 
 @pytest.fixture()
 def process_mock_factory():
-    def _factory(name):
+    def _factory(name: str) -> Mock:
         process_mock = Mock()
         process_mock.name = name
         process_mock.wait = AsyncMock(return_value=0)
@@ -20,7 +21,7 @@ def process_mock_factory():
 
 
 @pytest.fixture()
-def process_mock(process_mock_factory):
+def process_mock(process_mock_factory: t.Callable[[str], Mock]) -> Mock:
     process = process_mock_factory("echo")
     process.stdout.at_eof.side_effect = (False, False, False, True)
     process.stdout.readline = AsyncMock(
@@ -34,10 +35,10 @@ def process_mock(process_mock_factory):
     return process
 
 
-def test_exec(process_mock):
+def test_exec(process_mock: Mock):
     """Verify that the Invoker._exec method works as expected."""
 
-    async def _test_exec():
+    async def _test_exec() -> None:
         inv = Invoker("echo", cwd="/tmp", env={"FOO": "BAR"})
         with patch("asyncio.create_subprocess_exec") as mock:
             mock.return_value = process_mock

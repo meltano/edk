@@ -52,7 +52,7 @@ def test_copier_output(outdir: str):
         data={
             "admin_name": "John Doe",
             "cli_prefix": "testflow",
-            "extension_description": "A meltano utility extension for testflow that wraps the /bin/notreal command.",
+            "extension_description": "A meltano utility extension for testflow that wraps the /bin/notreal command.",  # noqa: E501
             "extension_id": "testflow-ext",
             "extension_name": "Testflow",
             "extension_name_lower": "testflow",
