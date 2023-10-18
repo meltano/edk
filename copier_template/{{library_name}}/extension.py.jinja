@@ -1,11 +1,8 @@
 """Meltano {{ extension_name }} extension."""
 from __future__ import annotations
 
-import os
-import pkgutil
 import subprocess
 import sys
-from pathlib import Path
 from typing import Any
 
 import structlog
@@ -54,5 +51,5 @@ class {{ extension_name }}(ExtensionBase):
                 models.InvokerCommand(
                     name="{{ cli_prefix }}_invoker", description="pass through invoker"
                 ),
-            ]
+            ],
         )
