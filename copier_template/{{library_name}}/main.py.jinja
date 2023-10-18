@@ -33,7 +33,7 @@ def initialize(
         ext.initialize(force)
     except Exception:
         log.exception(
-            "initialize failed with uncaught exception, please report to maintainer"
+            "initialize failed with uncaught exception, please report to maintainer",
         )
         sys.exit(1)
 
@@ -50,7 +50,10 @@ def invoke(ctx: typer.Context, command_args: List[str]) -> None:
     """
     command_name, command_args = command_args[0], command_args[1:]
     log.debug(
-        "called", command_name=command_name, command_args=command_args, env=os.environ
+        "called",
+        command_name=command_name,
+        command_args=command_args,
+        env=os.environ,
     )
     ext.pass_through_invoker(log, command_name, *command_args)
 
@@ -58,15 +61,17 @@ def invoke(ctx: typer.Context, command_args: List[str]) -> None:
 @app.command()
 def describe(
     output_format: DescribeFormat = typer.Option(
-        DescribeFormat.text, "--format", help="Output format"
-    )
+        DescribeFormat.text,
+        "--format",
+        help="Output format",
+    ),
 ) -> None:
     """Describe the available commands of this extension."""
     try:
         typer.echo(ext.describe_formatted(output_format))
     except Exception:
         log.exception(
-            "describe failed with uncaught exception, please report to maintainer"
+            "describe failed with uncaught exception, please report to maintainer",
         )
         sys.exit(1)
 
@@ -76,15 +81,21 @@ def main(
     ctx: typer.Context,
     log_level: str = typer.Option("INFO", envvar="LOG_LEVEL"),
     log_timestamps: bool = typer.Option(
-        False, envvar="LOG_TIMESTAMPS", help="Show timestamp in logs"
+        False,
+        envvar="LOG_TIMESTAMPS",
+        help="Show timestamp in logs",
     ),
     log_levels: bool = typer.Option(
-        False, "--log-levels", envvar="LOG_LEVELS", help="Show log levels"
+        False,
+        "--log-levels",
+        envvar="LOG_LEVELS",
+        help="Show log levels",
     ),
     meltano_log_json: bool = typer.Option(
-        False, "--meltano-log-json",
+        False,
+        "--meltano-log-json",
         envvar="MELTANO_LOG_JSON",
-        help="Log in the meltano JSON log format"
+        help="Log in the meltano JSON log format",
     ),
 ) -> None:
     """Simple Meltano extension that wraps the {{ wrapper_target_name }} CLI."""
@@ -92,5 +103,5 @@ def main(
         level=parse_log_level(log_level),
         timestamps=log_timestamps,
         levels=log_levels,
-        json_format=meltano_log_json
+        json_format=meltano_log_json,
     )

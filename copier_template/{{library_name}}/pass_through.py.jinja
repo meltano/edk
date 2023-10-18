@@ -12,5 +12,5 @@ def pass_through_cli() -> None:
     ext = {{extension_name}}()
     ext.pass_through_invoker(
         structlog.getLogger("{{ cli_prefix }}_invoker"),
-        *sys.argv[1:] if len(sys.argv) > 1 else []
+        *sys.argv[1:] if len(sys.argv) > 1 else [],
     )
