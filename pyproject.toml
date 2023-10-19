@@ -69,7 +69,7 @@ types-pyyaml = "^6.0.12.4"
 # Cookiecutter tests
 mypy = "^1.6"
 ruff = "~=0.1.0"
-typer = "^0.6.1"
+typer = ">=0.6.1,<0.10.0"
 
 [tool.ruff]
 ignore = [
