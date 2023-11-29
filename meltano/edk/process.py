@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import asyncio
 import os
+import signal
 import subprocess
 import typing as t
 
@@ -130,6 +131,12 @@ class Invoker:
             stderr=asyncio.subprocess.PIPE,
             cwd=self.cwd,
             env=self.popen_env,
+        )
+
+        loop = asyncio.get_event_loop()
+        loop.add_signal_handler(
+            signal.SIGINT,
+            lambda s=signal.SIGINT: p.send_signal(s),
         )
 
         streams: list[asyncio.streams.StreamReader] = []
