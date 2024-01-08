@@ -40,7 +40,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4"
-structlog = ">=21,<24"
+structlog = ">=21,<25"
 PyYAML = "^6.0.0"
 pydantic = ">=2,<3"
 devtools = ">=0.9.0,<1"
