@@ -63,7 +63,7 @@ docs = [
 
 [tool.poetry.group.dev.dependencies]
 copier = ">=8.1.0,<10.0"
-pytest = "^7.4.2"
+pytest = ">=7.4.2,<9.0.0"
 types-pyyaml = "^6.0.12.4"
 
 # Cookiecutter tests
