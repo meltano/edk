@@ -103,8 +103,8 @@ convention = "google"
 
 [build-system]
 requires = [
-    "poetry-core==1.5.0",
-    "poetry-dynamic-versioning==0.21.3",
+    "poetry-core==1.9",
+    "poetry-dynamic-versioning==1.2",
 ]
 build-backend = "poetry_dynamic_versioning.backend"
 
