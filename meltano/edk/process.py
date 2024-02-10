@@ -182,14 +182,16 @@ class Invoker:
         Raises:
             CalledProcessError: If the subprocess failed.
         """
-
         result = asyncio.run(self._exec(sub_command, *args))
         if result.returncode and raise_error:
             raise subprocess.CalledProcessError(
                 result.returncode, cmd=self.bin, stderr=None
             )
         elif result.returncode and not raise_error:
-            log_subprocess_error(self.bin, subprocess.CalledProcessError(
-                result.returncode, cmd=self.bin, stderr=None), 
-                "Error running subprocess"
+            log_subprocess_error(
+                self.bin,
+                subprocess.CalledProcessError(
+                    result.returncode, cmd=self.bin, stderr=None
+                ),
+                "Error running subprocess",
             )
