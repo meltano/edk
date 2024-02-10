@@ -76,15 +76,16 @@ class Invoker:
         to override these you're likely better served using `subprocess.run` directly.
 
         Lastly note that this method is blocking AND `subprocess.run` is called with
-        `check=True` and `raise_error=True`. This means that if the subprocess fails a `CalledProcessError`
-        will be raised.
+        `check=True` and `raise_error=True`. This means that if the subprocess 
+        fails a `CalledProcessError` will be raised.
 
         Args:
             *args: The arguments to pass to the subprocess.
             stdout: The stdout stream to use.
             stderr: The stderr stream to use.
             text: If true, decode stdin, stdout and stderr using the system default.
-            raise_error: If true, decode stdin, stdout and stderr using the system default.
+            raise_error: If true, decode stdin, stdout and stderr using the 
+                         system default.
             **kwargs: Additional keyword arguments to pass to subprocess.run.
 
         Returns:
@@ -174,7 +175,8 @@ class Invoker:
 
         Args:
             sub_command: The subcommand to run.
-            raise_error: If True (default), raises a CalledProcessError if the subprocess fails.
+            raise_error: If True (default), raises a CalledProcessError if 
+                         the subprocess fails.
             *args: The arguments to pass to the subprocess.
 
         Raises:
