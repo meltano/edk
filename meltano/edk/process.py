@@ -98,7 +98,6 @@ class Invoker:
             stderr=stderr,
             check=True,
             text=text,
-            raise_error=raise_error,
             **kwargs,
         )
 
@@ -182,7 +181,7 @@ class Invoker:
             CalledProcessError: If the subprocess failed.
         """
         try:
-            result = asyncio.run(self._exec(sub_command, raise_error, *args))
+            result = asyncio.run(self._exec(sub_command, *args))
             if result.returncode and raise_error:
                 raise subprocess.CalledProcessError(
                     result.returncode, cmd=self.bin, stderr=None
