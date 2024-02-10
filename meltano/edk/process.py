@@ -98,7 +98,8 @@ class Invoker:
             stderr=stderr,
             check=True,
             text=text,
-            raise_error=raise_error**kwargs,
+            raise_error=raise_error,
+            **kwargs,
         )
 
     @staticmethod
