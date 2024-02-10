@@ -60,6 +60,7 @@ class Invoker:
         stdout: None | int | t.IO = subprocess.PIPE,
         stderr: None | int | t.IO = subprocess.PIPE,
         text: bool = True,
+        raise_error: bool = True,
         **kwargs: t.Any,
     ) -> subprocess.CompletedProcess:
         """Run a subprocess. Simple wrapper around subprocess.run.
@@ -75,7 +76,7 @@ class Invoker:
         to override these you're likely better served using `subprocess.run` directly.
 
         Lastly note that this method is blocking AND `subprocess.run` is called with
-        `check=True`. This means that if the subprocess fails a `CalledProcessError`
+        `check=True` and `raise_error=True`. This means that if the subprocess fails a `CalledProcessError`
         will be raised.
 
         Args:
@@ -83,6 +84,7 @@ class Invoker:
             stdout: The stdout stream to use.
             stderr: The stderr stream to use.
             text: If true, decode stdin, stdout and stderr using the system default.
+            raise_error: If true, decode stdin, stdout and stderr using the system default. 
             **kwargs: Additional keyword arguments to pass to subprocess.run.
 
         Returns:
@@ -96,6 +98,7 @@ class Invoker:
             stderr=stderr,
             check=True,
             text=text,
+            raise_error=raise_error
             **kwargs,
         )
 
@@ -162,6 +165,7 @@ class Invoker:
     def run_and_log(
         self,
         sub_command: str | None = None,
+        raise_error: bool = True,
         *args: ExecArg,
     ) -> None:
         """Run a subprocess and stream the output to the logger.
@@ -171,13 +175,20 @@ class Invoker:
 
         Args:
             sub_command: The subcommand to run.
+            raise_error: If True (default), raises a CalledProcessError if the subprocess fails. 
             *args: The arguments to pass to the subprocess.
 
         Raises:
             CalledProcessError: If the subprocess failed.
         """
-        result = asyncio.run(self._exec(sub_command, *args))
-        if result.returncode:
-            raise subprocess.CalledProcessError(
-                result.returncode, cmd=self.bin, stderr=None
-            )
+        try: 
+            result = asyncio.run(self._exec(sub_command, raise_error, *args))
+            if result.returncode and raise_error:
+                raise subprocess.CalledProcessError(
+                    result.returncode, cmd=self.bin, stderr=None
+                )
+        except subprocess.CalledProcessError as e:
+            if raise_error:
+                raise
+            else:
+                log_subprocess_error(self.bin, e, "Error running subprocess")
