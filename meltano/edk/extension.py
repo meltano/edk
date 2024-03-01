@@ -1,4 +1,5 @@
 """Meltano extension SDK base class and supporting methods."""
+
 from __future__ import annotations
 
 import sys
