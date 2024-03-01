@@ -68,10 +68,13 @@ types-pyyaml = "^6.0.12.4"
 
 # Cookiecutter tests
 mypy = "^1.6"
-ruff = ">=0.1,<0.3"
+ruff = ">=0.1,<0.4"
 typer = ">=0.6.1,<0.10.0"
 
 [tool.ruff]
+target-version = "py38"
+
+[tool.ruff.lint]
 ignore = [
   "ANN101",
 ]
@@ -84,12 +87,11 @@ select = [
   "D",
   "UP",
 ]
-target-version = "py38"
 
-[tool.ruff.flake8-annotations]
+[tool.ruff.lint.flake8-annotations]
 allow-star-arg-any = true
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "docs/**" = [
   "D",
 ]
@@ -98,7 +100,7 @@ allow-star-arg-any = true
   "D",
 ]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [build-system]

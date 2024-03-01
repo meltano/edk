@@ -1,4 +1,5 @@
 """Recommended logging configuration for extensions."""
+
 from __future__ import annotations
 
 import logging
