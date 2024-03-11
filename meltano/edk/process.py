@@ -137,7 +137,7 @@ class Invoker:
         loop = asyncio.get_event_loop()
         loop.add_signal_handler(
             signal.SIGINT,
-            lambda s=signal.SIGINT: p.send_signal(s),
+            lambda s=signal.SIGINT: p.send_signal(s),  # type: ignore[misc]
         )
 
         streams: list[asyncio.streams.StreamReader] = []
