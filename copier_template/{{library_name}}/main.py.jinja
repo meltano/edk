@@ -5,7 +5,7 @@ import sys
 from typing import List
 
 import structlog
-import typer
+import typer  # type: ignore
 from meltano.edk.extension import DescribeFormat
 from meltano.edk.logging import default_logging_config, parse_log_level
 from {{library_name}}.extension import {{ extension_name }}
@@ -16,7 +16,8 @@ log = structlog.get_logger(APP_NAME)
 
 ext = {{ extension_name }}()
 
-typer.core.rich = None  # remove to enable stylized help output when `rich` is installed
+# remove to enable stylized help output when `rich` is installed
+typer.core.rich = None  # type: ignore
 app = typer.Typer(
     name=APP_NAME,
     pretty_exceptions_enable=False,
