@@ -52,7 +52,7 @@ html_logo = "_static/img/logo.svg"
 html_theme = "furo"
 html_theme_options = {
     # general
-    "source_repository": "https://github.com/meltano/edk/"
+    "source_repository": "https://github.com/meltano/edk/",
     "source_branch": "main",
     "source_directory": "docs/",
     "sidebar_hide_name": True,
