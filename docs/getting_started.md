@@ -25,7 +25,7 @@ pipx install copier
 Start a new EDK project using the supplied template (directly from Github):
 
 ```bash
-copier gh:meltano/edk my-new-extension
+copier copy gh:meltano/edk my-new-extension
 ```
 
 Install the project dependencies:
