@@ -1,10 +1,12 @@
 """Utilities for working with subprocesses."""
+
 from __future__ import annotations
 
 import asyncio
 import os
 import signal
 import subprocess
+import sys
 import typing as t
 
 import structlog
@@ -137,10 +139,13 @@ class Invoker:
         )
 
         loop = asyncio.get_event_loop()
-        loop.add_signal_handler(
-            signal.SIGINT,
-            lambda s=signal.SIGINT: p.send_signal(s),
-        )
+        # Windows does not support add_signal_handler
+        # https://docs.python.org/3/library/asyncio-platforms.html
+        if sys.platform != "win32":
+            loop.add_signal_handler(
+                signal.SIGINT,
+                lambda s=signal.SIGINT: p.send_signal(s),  # type: ignore[misc]
+            )
 
         streams: list[asyncio.streams.StreamReader] = []
 
