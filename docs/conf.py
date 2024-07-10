@@ -11,6 +11,7 @@
 #
 import os
 import sys
+from datetime import datetime
 
 sys.path.insert(0, os.path.abspath(".."))
 
@@ -18,7 +19,7 @@ sys.path.insert(0, os.path.abspath(".."))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "Meltano EDK"
-copyright = "2022, Meltano Core Team and Contributors"
+copyright = f"{datetime.now().year}, Arch Data, Inc and Contributors"  # noqa: A001, DTZ005
 author = "Meltano Core Team and Contributors"
 release = "0.0.1"
 
