@@ -76,9 +76,6 @@ typer = ">=0.6.1,<0.16.0"
 target-version = "py38"
 
 [tool.ruff.lint]
-ignore = [
-  "ANN101",
-]
 select = [
   "E",
   "F",
@@ -87,6 +84,9 @@ select = [
   "ANN",
   "D",
   "UP",
+  "SIM",
+  "PERF",
+  "FURB",
 ]
 
 [tool.ruff.lint.flake8-annotations]

@@ -95,13 +95,15 @@ class ExtensionBase(metaclass=ABCMeta):
         if output_format == DescribeFormat.text:
             return pformat(self.describe())
         elif output_format == DescribeFormat.json:
-            return self.describe().json(indent=2)
+            return self.describe().model_dump_json(indent=2)
         elif output_format == DescribeFormat.yaml:
             # just calling describe().dict() and dumping that to yaml yields a yaml that
             # is subtly different to the json variant in that it you have an additional
             # level of nesting.
             return yaml.dump(
-                yaml.safe_load(self.describe().json()), sort_keys=False, indent=2
+                yaml.safe_load(self.describe().model_dump_json()),
+                sort_keys=False,
+                indent=2,
             )
 
     def pass_through_invoker(
