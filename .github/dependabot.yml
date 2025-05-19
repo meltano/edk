@@ -6,7 +6,6 @@ updates:
       interval: weekly
       time: "12:00"
       timezone: "UTC"
-    reviewers: [meltano/engineering]
     labels: [dependencies]
     commit-message:
       prefix: "feat(deps): "
@@ -26,7 +25,6 @@ updates:
       interval: weekly
       time: "12:00"
       timezone: "UTC"
-    reviewers: [meltano/engineering]
     labels: [dependencies]
     commit-message:
       prefix: "ci: "
@@ -38,7 +36,6 @@ updates:
     directory: "/"
     schedule:
       interval: monthly
-    reviewers: [meltano/engineering]
     labels: [dependencies]
     commit-message:
       prefix: "ci: "
