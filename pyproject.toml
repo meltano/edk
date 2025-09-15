@@ -68,8 +68,8 @@ types-pyyaml = "^6.0.12.4"
 
 # Cookiecutter tests
 mypy = "^1.6"
-ruff = ">=0.5.0,<0.13"
-typer = ">=0.6.1,<0.17.0"
+ruff = ">=0.5.0,<0.14"
+typer = ">=0.6.1,<0.18.0"
 
 [tool.ruff]
 target-version = "py38"
