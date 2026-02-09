@@ -54,7 +54,7 @@ class Invoker:
         """
         self.bin = bin
         self.cwd = cwd
-        self.popen_env = env if env else os.environ.copy()
+        self.popen_env = env or os.environ.copy()
 
     def run(
         self,
