@@ -1,7 +1,5 @@
 """Various models used to describe extensions."""
 
-from typing import List
-
 from pydantic import BaseModel
 
 
@@ -10,7 +8,7 @@ class Command(BaseModel):
 
     name: str
     description: str
-    commands: List[str] = []
+    commands: list[str] = []
     pass_through_cli: bool = False
 
 
@@ -19,7 +17,7 @@ class ExtensionCommand(Command):
 
     description: str = "The extension cli"
     pass_through_cli: bool = False
-    commands: List[str] = [
+    commands: list[str] = [
         "describe",
         "invoke",
         "pre_invoke",
@@ -33,10 +31,10 @@ class InvokerCommand(Command):
 
     description: str = "The pass through invoker cli"
     pass_through_cli: bool = True
-    commands: List[str] = [":splat"]
+    commands: list[str] = [":splat"]
 
 
 class Describe(BaseModel):
     """Describes what commands and capabilities the extension provides."""
 
-    commands: List[Command]
+    commands: list[Command]

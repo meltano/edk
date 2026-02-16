@@ -2,6 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import TypeAlias
 
-ExecArg = Union[str, bytes]
+ExecArg: TypeAlias = str | bytes
