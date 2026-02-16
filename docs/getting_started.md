@@ -17,7 +17,7 @@ This repo ships with a [copier](https://copier.readthedocs.io/en/stable/) based 
 Install copier:
 
 ```bash
-pipx install copier
+uv tool install copier
 ```
 
 ### Use copier to initialize a new extension
