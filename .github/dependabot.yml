@@ -1,11 +1,9 @@
 version: 2
 updates:
-  - package-ecosystem: "pip"
+  - package-ecosystem: "uv"
     directory: "/"
     schedule:
-      interval: weekly
-      time: "12:00"
-      timezone: "UTC"
+      interval: monthly
     labels: [dependencies]
     commit-message:
       prefix: "feat(deps): "
@@ -19,19 +17,6 @@ updates:
         update-types:
           - "minor"
           - "patch"
-  - package-ecosystem: pip
-    directory: "/.github/workflows"
-    schedule:
-      interval: weekly
-      time: "12:00"
-      timezone: "UTC"
-    labels: [dependencies]
-    commit-message:
-      prefix: "ci: "
-    groups:
-      ci:
-        patterns:
-          - "*"
   - package-ecosystem: github-actions
     directory: "/"
     schedule:

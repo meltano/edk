@@ -14,7 +14,7 @@ This repo ships with a [copier](https://copier.readthedocs.io/en/stable/) based 
 Install copier:
 
 ```bash
-pipx install copier
+uv tool install copier
 ```
 
 ### Use copier to initialize a new extension
@@ -29,7 +29,7 @@ Install the project dependencies:
 
 ```bash
 cd my-new-extension
-poetry install
+uv sync
 ```
 
 ## Developing extensions using the EDK
