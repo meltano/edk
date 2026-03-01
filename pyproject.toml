@@ -53,11 +53,11 @@ Youtube = "https://www.youtube.com/meltano"
 [dependency-groups]
 dev = [
     "copier>=8.1.0,<10.0",
-    "pytest>=7.4.2,<9.0.0",
+    "pytest>=7.4.2,<10.0.0",
     "types-pyyaml>=6.0.12.4,<7",
     "mypy>=1.6,<2",
     "ruff>=0.5.0,<0.16",
-    "typer>=0.6.1,<0.24.0",
+    "typer>=0.6.1,<0.25.0",
 ]
 
 [tool.hatch.build.targets.sdist]
