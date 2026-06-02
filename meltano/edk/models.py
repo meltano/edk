@@ -1,40 +1,46 @@
 """Various models used to describe extensions."""
 
-from pydantic import BaseModel
+from dataclasses import dataclass, field
 
 
-class Command(BaseModel):
+@dataclass(slots=True)
+class Command:
     """Describe a generic runnable command."""
 
     name: str
     description: str
-    commands: list[str] = []
+    commands: list[str] = field(default_factory=list)
     pass_through_cli: bool = False
 
 
+@dataclass(slots=True)
 class ExtensionCommand(Command):
     """Describes an extension command."""
 
     description: str = "The extension cli"
     pass_through_cli: bool = False
-    commands: list[str] = [
-        "describe",
-        "invoke",
-        "pre_invoke",
-        "post_invoke",
-        "initialize",
-    ]
+    commands: list[str] = field(
+        default_factory=lambda: [
+            "describe",
+            "invoke",
+            "pre_invoke",
+            "post_invoke",
+            "initialize",
+        ]
+    )
 
 
+@dataclass(slots=True)
 class InvokerCommand(Command):
     """Describes an invoker style command."""
 
     description: str = "The pass through invoker cli"
     pass_through_cli: bool = True
-    commands: list[str] = [":splat"]
+    commands: list[str] = field(default_factory=lambda: [":splat"])
 
 
-class Describe(BaseModel):
+@dataclass(slots=True)
+class Describe:
     """Describes what commands and capabilities the extension provides."""
 
     commands: list[Command]
