@@ -685,7 +685,6 @@ name = "meltano-edk"
 source = { editable = "." }
 dependencies = [
     { name = "devtools" },
-    { name = "pydantic" },
     { name = "pyyaml" },
     { name = "structlog" },
 ]
@@ -718,7 +717,6 @@ requires-dist = [
     { name = "devtools", specifier = ">=0.9.0,<1" },
     { name = "furo", marker = "extra == 'docs'" },
     { name = "myst-parser", marker = "extra == 'docs'" },
-    { name = "pydantic", specifier = ">=2,<3" },
     { name = "pyyaml", specifier = ">=6,<7" },
     { name = "sphinx", marker = "extra == 'docs'" },
     { name = "sphinx-autobuild", marker = "extra == 'docs'" },

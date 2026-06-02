@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import dataclasses
+import json
 import sys
 from abc import ABCMeta, abstractmethod
 from enum import Enum
@@ -95,13 +97,10 @@ class ExtensionBase(metaclass=ABCMeta):
         if output_format == DescribeFormat.text:
             return pformat(self.describe())
         elif output_format == DescribeFormat.json:
-            return self.describe().model_dump_json(indent=2)
+            return json.dumps(dataclasses.asdict(self.describe()), indent=2)
         elif output_format == DescribeFormat.yaml:
-            # just calling describe().dict() and dumping that to yaml yields a yaml that
-            # is subtly different to the json variant in that it you have an additional
-            # level of nesting.
             return yaml.dump(
-                yaml.safe_load(self.describe().model_dump_json()),
+                dataclasses.asdict(self.describe()),
                 sort_keys=False,
                 indent=2,
             )
