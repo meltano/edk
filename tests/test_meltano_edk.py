@@ -52,7 +52,13 @@ def test_describe_formatted_json():
             {
                 "name": "test",
                 "description": "test",
-                "commands": ["describe", "invoke", "pre_invoke", "post_invoke", "initialize"],
+                "commands": [
+                    "describe",
+                    "invoke",
+                    "pre_invoke",
+                    "post_invoke",
+                    "initialize",
+                ],
                 "pass_through_cli": False,
             }
         ]
@@ -68,7 +74,13 @@ def test_describe_formatted_yaml():
             {
                 "name": "test",
                 "description": "test",
-                "commands": ["describe", "invoke", "pre_invoke", "post_invoke", "initialize"],
+                "commands": [
+                    "describe",
+                    "invoke",
+                    "pre_invoke",
+                    "post_invoke",
+                    "initialize",
+                ],
                 "pass_through_cli": False,
             }
         ]
