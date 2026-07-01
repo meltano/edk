@@ -26,7 +26,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "structlog>=21,<26",
+    "structlog>=21,<27",
     "PyYAML>=6,<7",
     "devtools>=0.9.0,<1",
 ]
